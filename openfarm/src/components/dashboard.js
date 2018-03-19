@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
     componentWillUnmount() {
      window.removeEventListener('resize', this.updateWindowDimensions);
    }
-   updateWindowDimensions() {
+   updateWindowDimensions =() => {
      this.setState({ width: window.innerWidth, height: window.innerHeight});
    }
   componentWillMount(){
@@ -23,15 +23,15 @@ export default class Dashboard extends Component {
     return (
       <div className="App">
         <div className='row' style={{marginTop:-20, }}>
-          <div className='col-sm-3' style={{fontSize:20, height:this.state.height-100, backgroundColor:'#eeeeee',}}>
+          <div className='col-md-3 hidden-xs hidden-sm' style={{fontSize:20, backgroundColor:'#eeeeee',}}>
             <div className='row'>
               <div  style={{backgroundColor:'#eeeeee', padding:20}}>
               <div className='panel-body'>
                 <div className='row'>
-                  <div className="pull-right" style={{marginTop:20, fontSize:15}}>Sunday August 9, 2017</div>
+                  <div className="pull-right" style={{fontSize:15}}>Sunday August 9, 2017</div>
                 </div>
                 <div className='row'>
-                  <div className='col-sm-6' style={{marginTop:30}}>
+                  <div className='col-sm-6' style={{marginTop:20}}>
                     <img src={require('../images/cloud-cover.svg')} style={{height:40, width:40}}  />
                   </div>
                   <div className='col-sm-6' style={{fontSize:60, fontWeight:'800'}}>27</div>
@@ -48,7 +48,7 @@ export default class Dashboard extends Component {
                   </div>
                   <div className='col-sm-6' style={{color:'grey'}}>LOW:&nbsp;<span style={{color:'#00abc9'}}>36</span></div>
                 </div>
-                <div className="row" style={{marginTop:20}}>
+                <div className="row" style={{marginTop:10}}>
                   <div className='pull-left' style={{marginLeft:20}}>Humidity </div>
                 </div>
                 <div className='row' style={{fontSize:15}}>
@@ -104,7 +104,7 @@ export default class Dashboard extends Component {
               </div>
             </div>
           </div>
-          <div className='col-sm-9' style={{fontSize:15, height:20}}>
+          <div className='col-md-9 cols-sm-12' style={{fontSize:15, height:20}}>
             <div className='row'>
               <div className='panel panel-default' style={{backgroundColor:'#f5f5f5'}}>
                 <div className='panel-body'>
@@ -116,7 +116,7 @@ export default class Dashboard extends Component {
                   <div className='col-sm-7'>
                       <div className='row'>
                         <div className='col-sm-4' style={{marginTop:15}}>
-                          <h4>View as: LIST CARD</h4>
+                          <h4>View as: List Card</h4>
                         </div>
 
                         <div className='col-sm-2'>
@@ -140,7 +140,7 @@ export default class Dashboard extends Component {
                         <div className='col-sm-2' >
                           <div className='column'>
                         <img src={require('../images/profile-view.svg')} style={{height:30, width:30}}  />
-                        <h5>User Profile</h5>
+                        <h5>User</h5>
                         </div>
                         </div>
                     </div>
@@ -148,7 +148,8 @@ export default class Dashboard extends Component {
                 </div>
               </div>
             </div>
-
+            <p>Hello World
+            </p>
           </div>
         </div>
       </div>
