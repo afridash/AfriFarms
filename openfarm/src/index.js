@@ -5,15 +5,25 @@ import { BrowserRouter, Route ,Switch,Router } from 'react-router-dom' //Naviati
 import App from './App'
 import Header from './components/header'
 import Dashboard from './components/dashboard'
+import About from './components/about'
+import Contact from './components/contact'
+import Funding from './components/funding'
+import News from './components/news'
+import Training from './components/training'
 import './index.css'
 render((
   //Render different routes
   <BrowserRouter >
     <div>
       <Switch>
-      <Route exact path={"/"} component={App} />
       <Header >
+      <Route exact path={"/"} component={App} />
       <Route exact path={"/dashboard"} component={Dashboard} />
+      <Route exact path={"/about"} component={About} />
+      <Route exact path={"/contact"} component={Contact} />
+      <Route exact path={"/news"} component={News} />
+      <Route exact path={"/funding"} component={Funding} />
+      <Route exact path={"/training"} component={Training} />
     </Header>
       </Switch>
     </div>
