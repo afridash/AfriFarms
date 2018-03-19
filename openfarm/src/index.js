@@ -12,6 +12,8 @@ import Funding from './components/funding'
 import News from './components/news'
 import Training from './components/training'
 import Storage from './components/storage'
+import Login from './components/login'
+import Register from './components/register'
 import './index.css'
 render((
   //Render different routes
@@ -25,9 +27,11 @@ render((
       <Route exact path={"/news"} component={News} />
       <Route exact path={"/funding"} component={Funding} />
       <Route exact path={"/training"} component={Training} />
-        <Route exact path={"/dashboard"} component={Dashboard} />
-        <Route exact path={"/notifications"} component={Notifications} />
-        <Route exact path={"/storage"} component={Storage} />
+      <Route exact path={"/dashboard"} component={Dashboard} />
+      <Route exact path={"/notifications"} component={Notifications} />
+      <Route exact path={"/storage"} component={Storage} />
+      <Route exact path={"/login"} component={Login} />
+      <Route exact path={"/register"} component={Register} />
     </Header>
       </Switch>
     </div>
