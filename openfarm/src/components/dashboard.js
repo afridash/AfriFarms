@@ -2,20 +2,37 @@ import React, { Component } from 'react';
 import '../App.css';
 
 export default class Dashboard extends Component {
+   constructor (props) {
+     super (props)
+     this.state = {
+       width:0,
+       height:0
+     }
+   }
+    componentWillUnmount() {
+     window.removeEventListener('resize', this.updateWindowDimensions);
+   }
+   updateWindowDimensions() {
+     this.setState({ width: window.innerWidth, height: window.innerHeight});
+   }
+  componentWillMount(){
+    this.updateWindowDimensions();
+     window.addEventListener('resize', this.updateWindowDimensions);
+  }
   render() {
     return (
       <div className="App">
-        <div className='row'>
-          <div className='col-sm-3' style={{fontSize:20}}>
+        <div className='row' style={{marginTop:-20, }}>
+          <div className='col-sm-3' style={{fontSize:20, height:this.state.height-100, backgroundColor:'#eeeeee',}}>
             <div className='row'>
-              <div className='panel panel-default' style={{backgroundColor:'#eeeeee', padding:20}}>
+              <div  style={{backgroundColor:'#eeeeee', padding:20}}>
               <div className='panel-body'>
                 <div className='row'>
                   <div className="pull-right" style={{marginTop:20, fontSize:15}}>Sunday August 9, 2017</div>
                 </div>
                 <div className='row'>
-                  <div className='col-sm-6'>
-                    <i className="fas fa-user-plus" style={{width:40, height:40, marginTop:30}}></i>
+                  <div className='col-sm-6' style={{marginTop:30}}>
+                    <img src={require('../images/cloud-cover.svg')} style={{height:40, width:40}}  />
                   </div>
                   <div className='col-sm-6' style={{fontSize:60, fontWeight:'800'}}>27</div>
                 </div>
@@ -29,7 +46,7 @@ export default class Dashboard extends Component {
                   <div className='col-sm-6'>
                     <div className='pull-left' style={{marginLeft:10, color:'grey'}}>HIGH:&nbsp; 46</div>
                   </div>
-                  <div className='col-sm-6' style={{color:'grey'}}>LOW:&nbsp;36</div>
+                  <div className='col-sm-6' style={{color:'grey'}}>LOW:&nbsp;<span style={{color:'#00abc9'}}>36</span></div>
                 </div>
                 <div className="row" style={{marginTop:20}}>
                   <div className='pull-left' style={{marginLeft:20}}>Humidity </div>
@@ -46,16 +63,16 @@ export default class Dashboard extends Component {
                   <div className='col-sm-6'>
                     <div className='pull-left' style={{marginLeft:10, color:'grey'}}>High:&nbsp; 30.90</div>
                   </div>
-                  <div className='col-sm-6' style={{color:'grey'}}>CURRENT:&nbsp;30.29</div>
+                  <div className='col-sm-6' style={{color:'grey'}}>CURRENT:&nbsp;<span style={{color:'#00abc9'}}>30.29</span></div>
                 </div>
                 <div className="row" style={{marginTop:20}}>
                   <div className='pull-left' style={{marginLeft:20}}>Rainfall </div>
                 </div>
                 <div className='row' style={{fontSize:15}}>
                   <div className='col-sm-6'>
-                    <div className='pull-left' style={{marginLeft:10, color:'grey'}}>CUMUL:&nbsp; 30.90</div>
+                    <div className='pull-left' style={{marginLeft:10, color:'grey'}}>CUMUL:&nbsp; 0</div>
                   </div>
-                  <div className='col-sm-6' style={{color:'grey'}}>CURRENT:&nbsp;30.29</div>
+                  <div className='col-sm-6' style={{color:'grey'}}>CURRENT:&nbsp;<span style={{color:'#00abc9'}}>0</span></div>
                 </div>
                 <div className="row" style={{marginTop:20}}>
                   <div className='pull-left' style={{marginLeft:20}}>Wind Speed </div>
@@ -70,7 +87,7 @@ export default class Dashboard extends Component {
                   <div className='col-sm-6'>
                     <div className='pull-left' style={{marginLeft:10, color:'grey'}}>3</div>
                   </div>
-                  <div className='col-sm-6' style={{color:'grey'}}>5</div>
+                  <div className='col-sm-6' style={{color:'#00abc9'}}>5</div>
                 </div>
                 <div className='row' style={{fontSize:15}}>
                   <div className='col-sm-4'>
@@ -79,7 +96,9 @@ export default class Dashboard extends Component {
                   <div className='col-sm-4' style={{color:'grey'}}>
                     <div className='pull-left'>315</div></div>
                   <div className='col-sm-4' style={{color:'grey'}}>
-                    <div className='pull-left'>NW</div></div>
+                    <div className='pull-left'>
+                      <p style={{color:'#00abc9'}}>NW</p>
+                    </div></div>
                 </div>
               </div>
               </div>
@@ -102,25 +121,25 @@ export default class Dashboard extends Component {
 
                         <div className='col-sm-2'>
                         <div className='column'>
-                        <i className="fas fa-user-plus" style={{width:20, height:20}}></i>
+                        <img src={require('../images/add-user.svg')} style={{height:30, width:30}}  />
                         <h5>New</h5>
                         </div>
                        </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <i className="fas fa-user-plus" style={{width:20, height:20}}></i>
+                          <img src={require('../images/report.svg')} style={{height:30, width:30}}  />
                           <h5>Reports</h5>
                           </div>
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <i className="fas fa-user-plus" style={{width:20, height:20}}></i>
+                          <img src={require('../images/chats.svg')} style={{height:30, width:30}}  />
                           <h5>Chats</h5>
                           </div>
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                        <i className="fas fa-eye" style={{width:20, height:20,}}></i>
+                        <img src={require('../images/profile-view.svg')} style={{height:30, width:30}}  />
                         <h5>User Profile</h5>
                         </div>
                         </div>
