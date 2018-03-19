@@ -53,7 +53,7 @@ export default class Header extends Component {
             <div className='col-md-3 col-sm-3'>
               <div className='pull-right'>
                 <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
-                  REGISTER/LOGIN
+                  <Link to="/login">REGISTER/LOGIN</Link>
                 </button>
               </div>
 
