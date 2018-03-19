@@ -148,7 +148,7 @@ export default class Dashboard extends Component {
                 </div>
               </div>
             </div>
-
+              <h5>User Profile</h5>
           </div>
         </div>
       </div>
