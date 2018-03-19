@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment'
 import weather from 'yahoo-weather'
 import '../App.css';
 
@@ -10,7 +11,7 @@ export default class Dashboard extends Component {
        height:0
      }
    }
-    componentWillUnmount() {
+  componentWillUnmount() {
      window.removeEventListener('resize', this.updateWindowDimensions);
    }
    updateWindowDimensions =() => {
@@ -23,6 +24,7 @@ export default class Dashboard extends Component {
      weather('lagos').then(info => {
        console.log(info)
        this.setState({
+         temp:info.item.condition.temp,
          pressure:info.atmosphere.pressure,
          humidity:info.atmosphere.rising,
          tempHigh:info.item.forecast[0].high,
@@ -44,13 +46,13 @@ export default class Dashboard extends Component {
               <div  style={{backgroundColor:'#eeeeee', padding:20}}>
               <div className='panel-body'>
                 <div className='row'>
-                  <div className="pull-right" style={{fontSize:15}}>Sunday August 9, 2017</div>
+                  <div className="pull-right" style={{fontSize:15}}>{moment().format('LLLL')}</div>
                 </div>
                 <div className='row'>
                   <div className='col-sm-6' style={{marginTop:20}}>
                     <img src={require('../images/cloud-cover.svg')} style={{height:40, width:40}}  />
                   </div>
-                  <div className='col-sm-6' style={{fontSize:60, fontWeight:'800'}}>27</div>
+                  <div className='col-sm-6' style={{fontSize:60, fontWeight:'800'}}>{this.state.temp}</div>
                 </div>
                 <div className='row'>
                   <h5>It will be {this.state.text} today. See recommended best farm practice for different crops today. Read More</h5>

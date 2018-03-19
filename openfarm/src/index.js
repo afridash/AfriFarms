@@ -4,7 +4,6 @@ import { BrowserRouter, Route ,Switch,Router } from 'react-router-dom' //Naviati
 //Import our route options
 import App from './App'
 import Header from './components/header'
-import DashboardHeader from './components/dashboardHeader'
 import Dashboard from './components/dashboard'
 import Notifications from './components/notifications'
 import About from './components/about'
@@ -12,6 +11,7 @@ import Contact from './components/contact'
 import Funding from './components/funding'
 import News from './components/news'
 import Training from './components/training'
+import Storage from './components/storage'
 import './index.css'
 render((
   //Render different routes
@@ -20,15 +20,14 @@ render((
       <Switch>
       <Header >
       <Route exact path={"/"} component={App} />
-      <DashboardHeader>
-        <Route exact path={"/dashboard"} component={Dashboard} />
-        <Route exact path={"/notifications"} component={Notifications} />
-      </DashboardHeader>
       <Route exact path={"/about"} component={About} />
       <Route exact path={"/contact"} component={Contact} />
       <Route exact path={"/news"} component={News} />
       <Route exact path={"/funding"} component={Funding} />
       <Route exact path={"/training"} component={Training} />
+        <Route exact path={"/dashboard"} component={Dashboard} />
+        <Route exact path={"/notifications"} component={Notifications} />
+        <Route exact path={"/storage"} component={Storage} />
     </Header>
       </Switch>
     </div>

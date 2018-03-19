@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import DashboardHeader from './dashboardHeader'
+import logo from '../logo.svg';
 import '../App.css';
 
-export default class News extends Component {
+export default class Storage extends Component {
   render() {
     return (
       <div className="App">
         <p className="App-intro">
-          This is the News
+          This is the storage
         </p>
       </div>
     );

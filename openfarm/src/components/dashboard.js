@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DashboardHeader from './dashboardHeader'
 import '../App.css';
 
 export default class Dashboard extends Component {
@@ -9,10 +10,15 @@ export default class Dashboard extends Component {
        height:0
      }
    }
+   showPage () {
+     return (
+         <p>Hello World </p>
+     )
+   }
   render() {
     return (
       <div className="App">
-        <p>Hello World </p>
+        <DashboardHeader children={this.showPage()} />
       </div>
     );
   }

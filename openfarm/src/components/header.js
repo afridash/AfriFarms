@@ -7,7 +7,7 @@ export default class Header extends Component {
   constructor (props) {
     super(props)
       this.state =  {
-        selected:'home'
+        selected:'home',
       }
   }
   render() {
@@ -52,9 +52,13 @@ export default class Header extends Component {
             </div>
             <div className='col-md-3 col-sm-3'>
               <div className='pull-right'>
-                <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
+                {!this.state.loggedIn ? <button onClick={()=>this.setState({loggedIn:!this.state.loggedIn})} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
                   REGISTER/LOGIN
+                </button> :
+                <button onClick={()=>this.setState({loggedIn:!this.state.loggedIn})} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
+                  LOGOUT
                 </button>
+              }
               </div>
 
             </div>
@@ -73,11 +77,13 @@ export default class Header extends Component {
     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul className="nav navbar-nav">
         <li onClick={()=>this.setState({selected:'home'})}> <Link  to='/' style={{color: this.state.selected === 'home' ? 'black' :'white'}}>HOME <span className="sr-only">(current)</span></Link></li>
-        <li onClick={()=>this.setState({selected:'funding'})}><Link to="/funding" style={{color:this.state.selected === 'funding' ? 'black' :'white'}}>FUNDING <span className="sr-only">(current)</span></Link></li>
+        {this.state.loggedIn &&   <li onClick={()=>this.setState({selected:'dashboard'})}> <Link  to='/dashboard' style={{color: this.state.selected === 'dashboard' ? 'black' :'white'}}>DASHBOARD</Link></li>}
+        <li onClick={()=>this.setState({selected:'funding'})}><Link to="/funding" style={{color:this.state.selected === 'funding' ? 'black' :'white'}}>FUNDING </Link></li>
         <li onClick={()=>this.setState({selected:'training'})}><Link to="/training" style={{color:this.state.selected === 'training' ? 'black' :'white'}}>TRAINING</Link></li>
         <li onClick={()=>this.setState({selected:'news'})}><Link to="/news" style={{color:this.state.selected === 'news' ? 'black' :'white'}}>NEWS</Link></li>
-        <li onClick={()=>this.setState({selected:'about'})}><Link to="/about" style={{color:this.state.selected === 'about' ? 'black' :'white'}}>ABOUT US</Link></li>
-        <li onClick={()=>this.setState({selected:'contact'})}><Link to="/contact" style={{color:this.state.selected === 'contact' ? 'black' :'white'}}>CONTACT US</Link></li>
+        {!this.state.loggedIn && <li onClick={()=>this.setState({selected:'about'})}><Link to="/about" style={{color:this.state.selected === 'about' ? 'black' :'white'}}>ABOUT US</Link></li>}
+        {this.state.loggedIn ?   <li onClick={()=>this.setState({selected:'storage'})}> <Link  to='/storage' style={{color: this.state.selected === 'storage' ? 'black' :'white'}}>STORAGE FACILITIES</Link></li> :
+        <li onClick={()=>this.setState({selected:'contact'})}><Link to="/contact" style={{color:this.state.selected === 'contact' ? 'black' :'white'}}>CONTACT US</Link></li>}
       </ul>
       <ul className="nav navbar-nav navbar-right" style={{backgroundColor:'#007185'}}>
         <form className="navbar-form navbar-left">
