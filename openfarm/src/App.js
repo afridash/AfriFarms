@@ -9,7 +9,7 @@ import './App.css';
 class App extends Component {
   render() {
     return (
-      <div className="App" style={{marginTop:-20}}>
+      <div className="App" style={{marginTop:-25}}>
         <div id="myCarousel" className="carousel slide" data-ride="carousel">
           <ol className="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -22,7 +22,9 @@ class App extends Component {
               <div class="carousel-caption" style={{top:'50%'}}>
                 <h2 style={{fontWeight:'600'}}>Connect with Farmers,</h2>
                 <h2 style={{fontWeight:'600'}}>Funding, and Markets</h2>
-                <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
+                <a href='#'>
+                  <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
+                </a>
               </div>
             </div>
 
@@ -31,7 +33,9 @@ class App extends Component {
               <div class="carousel-caption" style={{top:'50%'}}>
                 <h2 style={{fontWeight:'600'}}>Connect with Farmers,</h2>
                 <h2 style={{fontWeight:'600'}}>Funding, and Markets</h2>
-                <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
+                <a href='#'>
+                  <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
+                </a>
               </div>
             </div>
             <div className="item">
@@ -39,7 +43,9 @@ class App extends Component {
               <div class="carousel-caption" style={{top:'50%'}}>
                 <h2 style={{fontWeight:'600'}}>Connect with Farmers,</h2>
                 <h2 style={{fontWeight:'600'}}>Funding, and Markets</h2>
-                <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
+                <a href='#'>
+                  <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
+                </a>
               </div>
             </div>
           </div>
@@ -88,11 +94,59 @@ class App extends Component {
           </div>
           <div className='container'>
             <div className='row'>
-              <div className='row'>
+              <div className='col-sm-12'>
                 <img src={require('./images/tiny-wheel.svg')} style={{padding:20, height:60, width:60}}  />
+                <div className='col-sm-12'>
+                  <h3>We are here to help Grow your Farm</h3>
+                  <i>Funding, Support Services, and Connection</i>
+                  <p style={{fontSize:14}}>Open Farm is built for you, the farmer looking for means to increase your network, sell produce faster, and gain acess to loans and grants. It is built for you the investor looking for a productive farm to invest in. And for everyone else, you are welcome to connect with our farmers, and investors.</p>
+                  <button style={{backgroundColor:'#1babc7', marginTop:40, padding:10, color:'white', borderColor:'transparent', borderRadius:30}}>SEE MORE ABOUT US</button>
+                </div>
               </div>
             </div>
           </div>
+          <div className='container' style={{marginTop:'5%'}}>
+            <div className='row'>
+              <div className='col-sm-12'>
+                <h3 style={{fontWeight:'600', fontSize:'16'}}>LATEST NEWS</h3>
+                <i>stay ahead of farming trend</i>
+              </div>
+              <div className='col-sm-12' style={{fontWeight:'500', fontSize:'20', marginTop:'5%'}}>
+                <div className='col-sm-3'>
+                  <p style={{fontWeight:'700', fontSize:'16'}}>Are farmers getting adequate...</p>
+                  <p>Register with OpenFarm to start your journey towards a more efficient farming experience.</p>
+                  <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
+                    <img src={require('./images/img-1.jpg')} style={{width:'100%', height:100}} />
+                  </div>
+                </div>
+                <div className='col-sm-3'>
+                  <p style={{fontWeight:'600', fontSize:'16'}}>Low cost fertilizer in the...</p>
+                  <p>Register with OpenFarm to start your journey towards a more efficient farming experience.</p>
+                  <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
+                  <img src={require('./images/img-2.jpg')} style={{width:'100%', height:100}} />
+                </div>
+                </div>
+                <div className='col-sm-3'>
+                  <p style={{fontWeight:'600', fontSize:'16'}}>The Best Time to...</p>
+                  <p>Register with OpenFarm to start your journey towards a more efficient farming experience.</p>
+                  <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
+                    <img src={require('./images/img-3.jpg')} style={{width:'100%', height:100}}  />
+                  </div>
+                </div>
+                <div className='col-sm-3'>
+                  <p style={{fontWeight:'600', fontSize:'16'}}>Why Farmers need mar...</p>
+                  <p>Register with OpenFarm to start your journey towards a more efficient farming experience.</p>
+                  <div className='row'>
+                  <img src={require('./images/img-4.jpg')} className='img-responsive' style={{width:'100%', height:100}}  />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='row' style={{marginTop:'10%'}}>
+          <i className="fas fa-copyright"></i>
+          <span> OpenFarm 2018. All Rights Reserved</span>
         </div>
         </div>
     );
