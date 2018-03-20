@@ -296,7 +296,7 @@ export default class Training extends Component {
         <div className="row" style={{marginTop:20}}>
           {this.state.videos.map((video, key)=>
             <div key={key} className='col-sm-4'>
-              <iframe width="320" height="245" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+              <iframe width="320" height="245" src={video.url}></iframe>
               <p style={{fontSize:14, fontWeight:'600'}}>{video.title} created by {video.createdBy}</p>
             </div>
           )}

@@ -19,7 +19,6 @@ import Register from './components/register'
 import AdminHome from './components/admin'
 import GeneralNews from './components/generalNews'
 import Profile from './components/profile'
-import DoctorHome from './components/doctorHome'
 import './index.css'
 render((
   //Render different routes
@@ -41,7 +40,7 @@ render((
       <Route exact path={"/register"} component={Register} />
       <Route exact path={"/news"} component={GeneralNews} />
       <Route exact path={"/profile"} component={Profile} />
-      <Route exact path={"/home"} component={DoctorHome} />
+      <Route exact path={"/home"} component={Dashboard} />
     </Header>
       </Switch>
     </div>
