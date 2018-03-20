@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import DashboardHeader from './dashboardHeader'
+import {Firebase} from '../helpers/firebase'
 import '../App.css';
+const firebase = require('firebase')
 
 export default class News extends Component {
+  constructor (props){
+    super (props)
+    this.state={
+      news: [],
+      loading: true,
+      noNews: false,
+    }
+  }
+
   showPage () {
     return (
       <div className="App">
@@ -64,13 +75,14 @@ export default class News extends Component {
                 </button>
             </div>
                 </div>
-      </div>
-    </div>
-  </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
+
   render() {
     return (
       <DashboardHeader children={this.showPage()} />
