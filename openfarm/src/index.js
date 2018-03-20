@@ -8,14 +8,15 @@ import Dashboard from './components/dashboard'
 import Notifications from './components/notifications'
 import About from './components/about'
 import Contact from './components/contact'
-import Funding from './components/funding'
-import News from './components/news'
+import Funding from './components/adminFunding'
+import News from './components/adminNews'
 import Home from './components/home'
 import ViewFunding from './components/viewFunding'
-import Training from './components/training'
-import Storage from './components/storage'
+import Training from './components/adminTraining'
+import Storage from './components/adminStorage'
 import Login from './components/login'
 import Register from './components/register'
+import AdminHome from './components/admin'
 import './index.css'
 render((
   //Render different routes
@@ -26,13 +27,14 @@ render((
       <Route exact path={"/"} component={App} />
       <Route exact path={"/about"} component={About} />
       <Route exact path={"/contact"} component={Contact} />
-      <Route exact path={"/news"} component={News} />
-      <Route exact path={"/funding"} component={Funding} />
-      <Route exact path={"/training"} component={Training} />
+      <Route exact path={"/admin/news"} component={News} />
+      <Route exact path={"/admin/funding"} component={Funding} />
+      <Route exact path={"/admin/training"} component={Training} />
       <Route exact path={"/dashboard"} component={Dashboard} />
       <Route exact path={"/notifications"} component={Notifications} />
-      <Route exact path={"/storage"} component={Storage} />
+      <Route exact path={"/admin/storage"} component={Storage} />
       <Route exact path={"/login"} component={Login} />
+      <Route exact path={"/admin"} component={AdminHome} />
       <Route exact path={"/register"} component={Register} />
     </Header>
       </Switch>
