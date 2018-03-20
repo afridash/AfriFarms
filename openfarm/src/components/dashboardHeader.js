@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 import FileReaderInput from 'react-file-reader-input'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
 import moment from 'moment'
+import { Link,Redirect, } from 'react-router-dom'
 import weather from 'yahoo-weather'
 import '../App.css';
 const styles = {
@@ -379,8 +379,10 @@ export default class Dashboard extends Component {
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
-                          <h5>Chats</h5>
+                            <Link to="/notifications">
+                              <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
+                              <h5>Chats</h5>
+                            </Link>
                           </div>
                         </div>
                         <div onClick={()=>this.setState({showProfile:!this.state.showProfile, selected:'user'})} className='col-sm-2' >
