@@ -5,7 +5,6 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { EditorState, convertFromRaw } from 'draft-js'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
-import logo from '../logo.svg';
 import '../App.css';
 
 export default class Funding extends Component {
@@ -75,6 +74,7 @@ export default class Funding extends Component {
     this.setState({questions:this.questions})
   }
   saveFunding () {
+    this.setState({loading:true})
     if (this.authenticateData()) {
       var data = {
         post:this.state.post,
@@ -91,7 +91,7 @@ export default class Funding extends Component {
       item.setWithPriority(data, 0 - Date.now())
       this.setState({loading:false, saved:true, title:'', editorState:EditorState.createEmpty(), fundType:'', questions:[]})
     }else{
-      this.setState({error:'Fields cannot be empty'})
+      this.setState({error:'Fields cannot be empty', loading:false})
     }
   }
   authenticateData () {
@@ -191,9 +191,11 @@ export default class Funding extends Component {
               </div>
             <div className='col-md-12' style={{margin:20}}>
               <p style={{color:'red'}}>{this.state.error}</p>
-              <button onClick={()=>this.saveFunding()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15}}>
+              {this.state.loading ? <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15}}>Saving...
+              </button> : <button onClick={()=>this.saveFunding()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15}}>
                 Submit
-              </button>
+              </button>}
+
               </div>
               </div>
             </div>

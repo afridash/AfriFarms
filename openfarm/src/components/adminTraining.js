@@ -110,9 +110,13 @@ export default class Training extends Component {
         </div>
         <div className='col-md-12' style={{margin:20}}>
             <p style={{color:'red'}}>{this.state.error}</p>
+            {this.state.loading ? <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>
+              Saving...
+            </button>:
             <button onClick={()=>this.saveArticle()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>
               Create
-            </button>
+            </button>}
+
         </div>
       </div>
 
@@ -134,7 +138,7 @@ export default class Training extends Component {
       item.setWithPriority(data, 0 - Date.now())
       this.setState({loading:false, saved:true, title:'', url:'', error:''})
     }else{
-      this.setState({error:'URL and title must be filled'})
+      this.setState({error:'URL and title must be filled', loading:false})
     }
   }
   saveArticle () {
@@ -153,7 +157,7 @@ export default class Training extends Component {
       item.setWithPriority(data, 0 - Date.now())
       this.setState({loading:false, saved:true, title:'', url:'', editorState:EditorState.createEmpty(), error:''})
     }else{
-      this.setState({error:'Title, and article cannot be empty'})
+      this.setState({error:'Title, and article cannot be empty', loading:false})
     }
   }
   authenticateDataVideo () {
@@ -189,9 +193,13 @@ export default class Training extends Component {
         </div>
         <div className='col-sm-12' style={{margin:20}}>
           <p style={{color:'red'}}>{this.state.error}</p>
-            <button onClick={()=>this.saveVideo()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>
-              Create
-            </button>
+           {this.state.loading ? <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>
+             Saving...
+           </button> :
+           <button onClick={()=>this.saveVideo()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>
+             Create
+           </button> }
+
         </div>
       </div>
     )
