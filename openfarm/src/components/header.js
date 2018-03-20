@@ -25,10 +25,18 @@ export default class Header extends Component {
       alert('There was an error logging out')
     })
   }
+  handleChange = (event) => {
+    this.setState({[event.target.name] : event.target.value})
+  }
+  search (event) {
+    event.preventDefault()
+    this.setState({searchRedirect:true})
+  }
   render() {
     return (
       <div className='App'>
         {this.state.redirect && <Redirect to='/' push />}
+        {this.state.searchRedirect && <Redirect to={'/search/'+this.state.search} push />}
         <div className='row hidden-xs' style={{backgroundColor:'#FAFAFA',border: '0.5px solid lightgrey', }}>
           <div className='row' style={{margin:10}}>
             <div className='col-md-3 col-sm-3'>
@@ -106,7 +114,8 @@ export default class Header extends Component {
       <ul className="nav navbar-nav navbar-right" style={{backgroundColor:'#007185'}}>
         <form className="navbar-form navbar-left">
           <div className="form-group">
-            <input type="text"  className="form-control" placeholder="Search" style={{backgroundColor:'transparent', color:'white', border:'0px solid transparent'}} />
+            <input type="text" onChange={this.handleChange} name='search' value={this.state.search} className="form-control" placeholder="Search by name/produce" style={{backgroundColor:'transparent', color:'white', border:'0px solid transparent', placeholderColor:'white'}} />
+            <button type='submit' style={{display:'none'}} onClick={(event)=>this.search(event)}>Hello</button>
           </div>
         </form>
       </ul>

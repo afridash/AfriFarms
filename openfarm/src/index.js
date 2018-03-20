@@ -19,6 +19,7 @@ import Register from './components/register'
 import AdminHome from './components/admin'
 import GeneralNews from './components/generalNews'
 import Profile from './components/profile'
+import Search from './components/search'
 import './index.css'
 render((
   //Render different routes
@@ -28,6 +29,7 @@ render((
       <Header >
       <Route exact path={"/"} component={App} />
       <Route exact path={"/about"} component={About} />
+      <Route exact path={"/search/:id"} component={Search} />
       <Route exact path={"/contact"} component={Contact} />
       <Route exact path={"/admin/news"} component={News} />
       <Route exact path={"/admin/funding"} component={Funding} />
@@ -39,7 +41,7 @@ render((
       <Route exact path={"/admin"} component={AdminHome} />
       <Route exact path={"/register"} component={Register} />
       <Route exact path={"/news"} component={GeneralNews} />
-      <Route exact path={"/profile"} component={Profile} />
+      <Route exact path={"/profile/:id"} component={Profile} />
       <Route exact path={"/home"} component={Dashboard} />
     </Header>
       </Switch>
