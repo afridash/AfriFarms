@@ -23,6 +23,7 @@ export default class Dashboard extends Component {
        lastName:'',
        address:'',
        phone:'',
+       bio:'',
      }
      firebase.auth().onAuthStateChanged(this.handleUser)
      this.usersRef = firebase.database().ref().child('users')
@@ -40,7 +41,7 @@ export default class Dashboard extends Component {
     this.updateWindowDimensions();
      window.addEventListener('resize', this.updateWindowDimensions)
 
-     weather('lagos').then(info => {
+     weather('port harcourt').then(info => {
        this.setState({
          temp:info.item.condition.temp,
          pressure:info.atmosphere.pressure,
@@ -138,6 +139,7 @@ export default class Dashboard extends Component {
         address:this.state.address,
         state:this.state.state,
         phone:this.state.phone,
+        bio:this.state.bio,
         produce:this.state.produce,
       }
       var user = firebase.auth().currentUser
@@ -253,6 +255,12 @@ export default class Dashboard extends Component {
                   onChange = {this.handleChange}
                 />
               </FormGroup>
+              <div className='row' style={{marginTop:10}}>
+                <label htmlFor="description">Bio</label>
+                <div className='col-sm-12'>
+                  <textarea rows='5' placeholder='Bio' className='form-control' name='bio' value={this.state.bio} onChange={this.handleChange} />
+                </div>
+              </div>
                 <FormGroup>
                   {this.state.loading ? <Button className="pull-right" type="submit"  bsSize="sm" style={{...styles.button, backgroundColor:'#1babc7', fontSize:16, color:'white'}}
                     >Saving in..</Button> : <Button className="pull-right" type="submit"  bsSize="sm" style={{...styles.button, backgroundColor:'#1babc7', fontSize:16, color:'white'}} onClick={(event) =>
@@ -353,8 +361,8 @@ export default class Dashboard extends Component {
                   </div>
                   <div className='col-sm-7'>
                       <div className='row'>
-                        <div className='col-sm-4' style={{marginTop:5}}>
-                          <h4>View as: List Card</h4>
+                        <div className='col-sm-4'>
+
                         </div>
 
                         <div className='col-sm-2'>

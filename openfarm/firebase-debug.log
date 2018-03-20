@@ -1,0 +1,31 @@
+[debug] [2018-03-20T15:41:47.375Z] ----------------------------------------------------------------------
+[debug] [2018-03-20T15:41:47.380Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2018-03-20T15:41:47.381Z] CLI Version:   3.10.0
+[debug] [2018-03-20T15:41:47.381Z] Platform:      darwin
+[debug] [2018-03-20T15:41:47.381Z] Node Version:  v6.11.3
+[debug] [2018-03-20T15:41:47.381Z] Time:          Tue Mar 20 2018 16:41:47 GMT+0100 (WAT)
+[debug] [2018-03-20T15:41:47.381Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-03-20T15:41:47.401Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-03-20T15:41:47.401Z] > authorizing via signed-in user
+[debug] [2018-03-20T15:41:47.404Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-03-20T15:41:47.404Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/BiGtfGSfioJeVS92zFC0JXsWWV2Jh2747tfQcN4H2Mc',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Mar 20 2018 16:41:47 GMT+0100 (WAT)
+[debug] [2018-03-20T15:41:48.978Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-20T15:41:48.995Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/openfarm-db746  
+ Tue Mar 20 2018 16:41:48 GMT+0100 (WAT)
+[debug] [2018-03-20T15:41:50.499Z] <<< HTTP RESPONSE 200
+[debug] [2018-03-20T15:41:50.500Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/openfarm-db746/tokens  
+ Tue Mar 20 2018 16:41:50 GMT+0100 (WAT)
+[debug] [2018-03-20T15:41:51.801Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'openfarm-db746'...
+[info] 
+[info] i  deploying hosting
+[info] i  hosting: preparing build directory for upload...
+[debug] [2018-03-20T15:41:53.779Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/openfarm-db746/uploads/-L833idC20fa7yBNOBpN?fileCount=30&message=  
+ Tue Mar 20 2018 16:41:53 GMT+0100 (WAT)
