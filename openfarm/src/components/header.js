@@ -69,7 +69,7 @@ export default class Header extends Component {
             <div className='col-md-3 col-sm-3'>
               <div className='pull-right'>
                 {!this.state.loggedIn ? <Link to='/login'>
-                  <button onClick={()=>this.setState({loggedIn:!this.state.loggedIn})} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
+                  <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
                   REGISTER/LOGIN
                 </button>
               </Link>:

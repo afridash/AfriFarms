@@ -4,6 +4,7 @@ import moment from 'moment'
 import FileReaderInput from 'react-file-reader-input'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { EditorState, convertFromRaw } from 'draft-js'
+import {Link} from 'react-router-dom'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
 import '../App.css';
@@ -111,7 +112,6 @@ export default class News extends Component {
     return (
       <div className="App">
         <div className='col-sm-8 col-sm-offset-2'>
-
           <ul className="nav nav-tabs">
             <li className="active"><a data-toggle="tab" href="#home">News</a></li>
             <li><a data-toggle="tab" href="#menu1">New Post</a></li>
@@ -215,15 +215,19 @@ export default class News extends Component {
                 </div>
               </div>
             <div className='row text-center' style={{margin:20}}>
+              <p style={{color:'red'}}>{this.state.error}</p>
               {this.state.loading ? <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>Saving...
               </button> : <button onClick={()=>this.saveNews()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>Create
               </button>}
-
             </div>
             </div>
           </div>
         </div>
       </div>
+
+      </div>
+      <div style={{"position": "fixed", "zIndex": 1000, "bottom": "5%", "left": "5%"}} className='pull-left'>
+        <Link to='/admin'><button style={{color:'white', fontSize:18, borderRadius:10, backgroundColor:'#069fba', padding:5, margin:10}}>Back</button></Link>
       </div>
     </div>
     )
