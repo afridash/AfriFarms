@@ -4,11 +4,16 @@ import { BrowserRouter, Route ,Switch,Router } from 'react-router-dom' //Naviati
 //Import our route options
 import App from './App'
 import Header from './components/header'
+import DashboardHeader from './components/dashboardHeader'
 import Dashboard from './components/dashboard'
+import Notifications from './components/notifications'
 import About from './components/about'
 import Contact from './components/contact'
 import Funding from './components/funding'
 import News from './components/news'
+import Home from './components/home'
+import ViewFunding from './components/viewFunding'
+import Storage from './components/storage'
 import Training from './components/training'
 import './index.css'
 render((
@@ -18,12 +23,22 @@ render((
       <Switch>
       <Header >
       <Route exact path={"/"} component={App} />
-      <Route exact path={"/dashboard"} component={Dashboard} />
+      <DashboardHeader>
+        <Route exact path={"/dashboard"} component={Dashboard} />
+        <Route exact path={"/notifications"} component={Notifications} />
+        <Route exact path={"/home"} component={Home} />
+        <Route exact path={"/funding"} component={Funding} />
+        <Route exact path={"/viewfunding"} component={ViewFunding} />
+        <Route exact path={"/storage"} component={Storage} />
+        <Route exact path={"/news"} component={News} />
+          <Route exact path={"/training"} component={Training} />
+      </DashboardHeader>
       <Route exact path={"/about"} component={About} />
       <Route exact path={"/contact"} component={Contact} />
-      <Route exact path={"/news"} component={News} />
-      <Route exact path={"/funding"} component={Funding} />
-      <Route exact path={"/training"} component={Training} />
+
+
+
+
     </Header>
       </Switch>
     </div>

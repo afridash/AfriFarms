@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 
-export default class News extends Component {
+export default class Storage extends Component {
   render() {
     return (
       <div className="App">
         <div>
           <ul className="nav nav-tabs">
-      <li className="active"><a data-toggle="tab" href="#home">News</a></li>
-      <li><a data-toggle="tab" href="#menu1">New Post</a></li>
+      <li className="active"><a data-toggle="tab" href="#home">Storages</a></li>
+      <li><a data-toggle="tab" href="#menu1">Add Storage</a></li>
     </ul>
 
     <div className="tab-content">
@@ -18,22 +18,22 @@ export default class News extends Component {
         <div className='col-sm-7'>
             <div className='col-sm-12' style={{marginTop:20,}}>
               <p style={{borderRadius:2, borderColor:'black', backgroundColor:'lightgrey', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
-                &nbsp;United Nations Feed The World Fund
-                <span  className='pull-right' style={{fontSize:15,marginTop:10}}>&nbsp;&nbsp;30/02/2017&nbsp;&nbsp;</span></p>
+                &nbsp;State Storage Warehouse
+                </p>
             </div>
         </div>
         <div className='col-sm-7'>
             <div className='col-sm-12' style={{marginTop:5,}}>
               <p style={{borderRadius:2, borderColor:'black', backgroundColor:'lightgrey', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
-                &nbsp;Nigeria Farmers Association Grant
-                <span  className='pull-right' style={{fontSize:15,marginTop:10}}>&nbsp;&nbsp;30/02/2017&nbsp;&nbsp;</span></p>
+                &nbsp;Farmers Association Storage Unit
+              </p>
             </div>
         </div>
         <div className='col-sm-7'>
             <div className='col-sm-12' style={{marginTop:5,}}>
               <p style={{borderRadius:2, borderColor:'black', backgroundColor:'lightgrey', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
-                &nbsp;One Young World Innovation in Agriculture
-                <span  className='pull-right' style={{fontSize:15, marginTop:10}}>&nbsp;&nbsp;30/02/2017&nbsp;&nbsp;</span></p>
+                &nbsp;UN Barn Storage Facility
+              </p>
             </div>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default class News extends Component {
                 </div>
             <div className='col-md-12'>
                 <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15, marginTop:20}}>
-                  Create
+                  Add
                 </button>
             </div>
                 </div>

@@ -12,7 +12,7 @@ export default class Header extends Component {
   }
   render() {
     return (
-      <div style={{minHeight:'900px'}}>
+      <div className='App'>
         <div className='row hidden-xs' style={{backgroundColor:'#FAFAFA',border: '0.5px solid lightgrey', }}>
           <div className='row' style={{margin:10}}>
             <div className='col-md-3 col-sm-3'>
