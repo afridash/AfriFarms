@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DashboardHeader from './dashboardHeader'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
+import Home from './home'
 import '../App.css';
 
 export default class Dashboard extends Component {
@@ -37,7 +38,7 @@ export default class Dashboard extends Component {
    }
    showPageContent () {
      return (
-       <p>Hello everyone!</p>
+      <Home />
      )
    }
   render() {
