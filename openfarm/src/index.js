@@ -35,7 +35,7 @@ render((
       <Route exact path={"/admin/funding"} component={Funding} />
       <Route exact path={"/admin/training"} component={Training} />
       <Route exact path={"/dashboard"} component={Dashboard} />
-      <Route exact path={"/notifications"} component={Notifications} />
+      <Route exact path={"/chats"} component={Notifications} />
       <Route exact path={"/admin/storage"} component={Storage} />
       <Route exact path={"/login"} component={Login} />
       <Route exact path={"/admin"} component={AdminHome} />

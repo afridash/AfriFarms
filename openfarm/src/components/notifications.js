@@ -28,7 +28,7 @@ export default class Notifications extends Component {
                 <br/>
                <div className='col-sm-2'>
                  <div className='column'>
-                   <img src={{uri: item.picture.thumbnail}} style={{height:60, width:60, borderRadius:30}} />
+                   <img src={ item.picture.thumbnail} style={{height:60, width:60, borderRadius:30}} />
                  </div>
                </div>
 
@@ -50,7 +50,6 @@ export default class Notifications extends Component {
          )
        })
        this.setState({chats: chats});
-       console.log("state", this.state.chats);
      })
      .catch(error => {
        alert(error)

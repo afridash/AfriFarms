@@ -379,7 +379,7 @@ export default class Dashboard extends Component {
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                            <Link to="/notifications">
+                            <Link to="/chats">
                               <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
                               <h5>Chats</h5>
                             </Link>

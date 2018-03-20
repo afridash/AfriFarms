@@ -7,17 +7,23 @@ import '../App.css';
 export default class Profile extends Component {
   constructor(props) {
     super(props)
+    this.profileId = this.props.match.params.id
     this.state = {
-      isLoading:true
+      isLoading:true,
+      user:this.profileId
     }
     this.usersRef = firebase.database().ref().child('users')
     firebase.auth().onAuthStateChanged(this.handleUser)
+    this.getDetails(this.profileId)
   }
   handleUser = (user) => {
     if (user) {
       this.setState({displayName:user.displayName, userId:user.uid, profilePicture:user.photoURL})
-      this.getDetails(user.uid)
-
+    }
+  }
+  componentWillReceiveProps ( newProps ) {
+    if (this.profileId !== newProps.match.params.id) {
+      this.getDetails(newProps.match.params.id)
     }
   }
   getDetails (userId) {
