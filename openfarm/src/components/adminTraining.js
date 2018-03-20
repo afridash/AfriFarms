@@ -284,7 +284,7 @@ export default class Training extends Component {
                   }else if (this.state.articleType === 'video') {
                     return this.showVideo()
                   }else return (
-                    <div className='container text-center'>
+                    <div className='text-center'>
                       <p>Select type to add training</p>
                     </div>
                   )
