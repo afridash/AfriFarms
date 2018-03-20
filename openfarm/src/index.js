@@ -17,6 +17,9 @@ import Storage from './components/adminStorage'
 import Login from './components/login'
 import Register from './components/register'
 import AdminHome from './components/admin'
+import GeneralNews from './components/generalNews'
+import Profile from './components/profile'
+import DoctorHome from './components/doctorHome'
 import './index.css'
 render((
   //Render different routes
@@ -36,6 +39,9 @@ render((
       <Route exact path={"/login"} component={Login} />
       <Route exact path={"/admin"} component={AdminHome} />
       <Route exact path={"/register"} component={Register} />
+      <Route exact path={"/news"} component={GeneralNews} />
+      <Route exact path={"/profile"} component={Profile} />
+      <Route exact path={"/home"} component={DoctorHome} />
     </Header>
       </Switch>
     </div>
