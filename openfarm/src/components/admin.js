@@ -13,7 +13,7 @@ export default class AdminHome extends Component {
      }
      firebase.auth().onAuthStateChanged(this.handleUser)
    }
-   handleUser = (user) => {
+  handleUser = (user) => {
      if (user){
        this.setState({displayName:user.displayName})
      }
