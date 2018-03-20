@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
+import FileReaderInput from 'react-file-reader-input'
+import * as firebase from 'firebase'
+import {Firebase} from '../helpers/firebase'
 import moment from 'moment'
 import weather from 'yahoo-weather'
 import '../App.css';
@@ -11,12 +14,18 @@ const styles = {
   },
 };
 export default class Dashboard extends Component {
-   constructor (props) {
+  constructor (props) {
      super (props)
      this.state = {
-       width:0,
-       height:0,
+       produce:'',
+       firstName:'',
+       middleName:'',
+       lastName:'',
+       address:'',
+       phone:'',
      }
+     firebase.auth().onAuthStateChanged(this.handleUser)
+     this.usersRef = firebase.database().ref().child('users')
    }
   componentWillUnmount() {
      window.removeEventListener('resize', this.updateWindowDimensions);
@@ -24,7 +33,7 @@ export default class Dashboard extends Component {
    updateWindowDimensions =() => {
      this.setState({ width: window.innerWidth, height: window.innerHeight});
    }
-   handleChange = (event) => {
+  handleChange = (event) => {
      this.setState({[event.target.name]:event.target.value})
    }
   componentWillMount(){
@@ -45,13 +54,123 @@ export default class Dashboard extends Component {
      }).catch(err => {
        // Oops! Errors! :(
      });
+
+  }
+  handleUser = (user) => {
+    if (user) {
+      this.setState({userId:user.uid})
+      this.getUserInfo(user.uid)
+    }
+  }
+  handleFile = (e, results) => {
+    results.forEach(result => {
+      const [e, file] = result; //Retrieve the picture that was selected
+      this.setState({profilePicture:e.target.result,mime:file.type}) //Store the picture as a state variable before trying to save
+      this.saveProfilePicture(e.target.result)
+    });
+  }
+  saveProfilePicture (file) {
+    const sessionId = new Date().getTime()
+    var ref=firebase.storage().ref().child('users').child('profile').child(this.state.userId).child(`${sessionId}`)
+     var uploadTask = ref.putString(file, 'data_url') //Save the picture
+
+     uploadTask.on('state_changed', (snapshot) => {
+     // Observe state change events such as progress, pause, and resume
+     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+     var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+     this.setState({width:progress.toFixed(0), uploading:true})
+     switch (snapshot.state) {
+       case firebase.storage.TaskState.PAUSED: // or 'paused'
+         break;
+       case firebase.storage.TaskState.RUNNING: // or 'running'
+         break;
+      default:
+        break;
+     }
+     }, function(error) {
+     // Handle unsuccessful uploads
+     }, (success) => {
+     // Handle successful uploads on complete
+     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+       var downloadURL = uploadTask.snapshot.downloadURL;
+       this.updateProfilePicture (downloadURL)
+     });
+  }
+  updateProfilePicture (downloadURL) {
+    this.setState({uploading:false})
+    var user = firebase.auth().currentUser
+    if(user){
+      user.updateProfile({
+        photoURL: downloadURL
+      }).then(()=> {
+          this.usersRef.child(this.state.userId).update({profilePicture:downloadURL})
+      }, function(error) {
+        alert("There was an error uploading your picture")
+      });
+    }
+
+  }
+  getUserInfo (userId) {
+    this.usersRef.child(userId).once('value', (user)=> {
+      this.setState({
+        firstName:user.val().firstName,
+        middleName:user.val().middleName,
+        lastName:user.val().lastName,
+        gender:user.val().gender,
+        address:user.val().address,
+        state:user.val().state,
+        phone:user.val().phone,
+        produce:user.val().produce,
+        profilePicture:user.val().profilePicture
+      })
+    })
+  }
+  handleSubmit (event) {
+    event.preventDefault()
+    this.setState({loading:true})
+    if (this.authenticateData()){
+      var data = {
+        firstName:this.state.firstName,
+        middleName:this.state.middleName,
+        lastName:this.state.lastName,
+        displayName:this.state.firstName + ' ' + this.state.lastName,
+        gender:this.state.gender,
+        address:this.state.address,
+        state:this.state.state,
+        phone:this.state.phone,
+        produce:this.state.produce,
+      }
+      var user = firebase.auth().currentUser
+      user.updateProfile({
+        displayName: this.state.firstName + ' ' + this.state.lastName,
+        photoURL: "https://example.com/jane-q-user/profile.jpg"
+      }).then(()=> {
+        this.usersRef.child(this.state.userId).update(data, (error)=> {
+          if (!error) this.setState({loading:false})
+          else {
+            alert ('Error updating user profile, try again later')
+            this.setState({loading:false})
+          }
+        })
+      }).catch((error)=> {
+        alert('Error updating user profile, try again')
+      });
+
+    }
+  }
+  authenticateData () {
+    return this.state.firstName !== '' && this.state.lastName && this.state.state !==undefined && this.state.gender !== undefined && this.state.address !=='' && this.state.phone !==''
   }
   showProfile () {
     return (
       <div className='row'>
         <div className='col-sm-12' style={{height:'500px', overflowX:'scroll'}}>
           <p style={{fontWeight:'600', fontSize:16}}>Edit My Profile <Link to='#' className='pull-right' onClick={()=>this.setState({showProfile:!this.state.showProfile})}><i className="fas fa-times"></i></Link></p>
-          <img src={require('../images/profile-pic.svg')} className='img-thumbnail' style={{width:50, height:50}} />
+          <FileReaderInput as="url" id="my-file-input"
+            onChange={this.handleFile}>
+            {this.state.profilePicture ? <img src={this.state.profilePicture} className='img-thumbnail' style={{width:100, height:100}} />: <img src={require('../images/profile-pic.svg')} className='img-thumbnail' style={{width:50, height:50}} /> }
+          </FileReaderInput>
+          {this.state.uploading && <span style={{fontSize:10}}>Uploading...{this.state.width}%</span>}
           <form>
             <br/>
               <FormGroup>
@@ -59,6 +178,7 @@ export default class Dashboard extends Component {
                 <FormControl
                   className='form-control'
                   placeholder="First Name"
+                  value={this.state.firstName}
                   name='firstName'
                   onChange = {this.handleChange}
                 />
@@ -69,6 +189,7 @@ export default class Dashboard extends Component {
                 <FormControl
                   className='form-control'
                   name='middleName'
+                  value={this.state.middleName}
                   placeholder="Middle Name"
                   onChange = {this.handleChange}
                 />
@@ -78,6 +199,7 @@ export default class Dashboard extends Component {
                 <FormControl
                   className='form-control'
                   name='lastName'
+                  value={this.state.lastName}
                   placeholder="Last Name"
                   onChange = {this.handleChange}
                 />
@@ -95,6 +217,7 @@ export default class Dashboard extends Component {
                 <FormControl
                   className='form-control'
                   name='address'
+                  value={this.state.address}
                   placeholder="Address/Location"
                   onChange = {this.handleChange}
                 />
@@ -115,6 +238,7 @@ export default class Dashboard extends Component {
                 <FormControl
                   className='form-control'
                   name='phone'
+                  value={this.state.phone}
                   placeholder="Phone"
                   onChange = {this.handleChange}
                 />
@@ -124,6 +248,7 @@ export default class Dashboard extends Component {
                 <FormControl
                   className='form-control'
                   name='produce'
+                  value={this.state.produce}
                   placeholder="Farm Produce separated by semi-colon;"
                   onChange = {this.handleChange}
                 />
@@ -228,32 +353,32 @@ export default class Dashboard extends Component {
                   </div>
                   <div className='col-sm-7'>
                       <div className='row'>
-                        <div className='col-sm-4' style={{marginTop:15}}>
+                        <div className='col-sm-4' style={{marginTop:5}}>
                           <h4>View as: List Card</h4>
                         </div>
 
                         <div className='col-sm-2'>
                         <div className='column'>
-                        <img src={require('../images/add-user.svg')} style={{height:30, width:30}}  />
+                        <img src={require('../images/add-user.svg')} style={{height:20, width:20}}  />
                         <h5>New</h5>
                         </div>
                        </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <img src={require('../images/report.svg')} style={{height:30, width:30}}  />
+                          <img src={require('../images/report.svg')} style={{height:20, width:20}}  />
                           <h5>Reports</h5>
                           </div>
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <img src={require('../images/chats.svg')} style={{height:30, width:30}}  />
+                          <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
                           <h5>Chats</h5>
                           </div>
                         </div>
-                        <div onClick={()=>this.setState({showProfile:!this.state.showProfile})} className='col-sm-2' >
-                          <div className='column'>
-                        <img src={require('../images/profile-view.svg')} style={{height:30, width:30}}  />
-                        <h5>User</h5>
+                        <div onClick={()=>this.setState({showProfile:!this.state.showProfile, selected:'user'})} className='col-sm-2' >
+                          <div style={{color:this.state.selected === 'user' ? '#069fba' : 'black'}} className='column'>
+                        <img src={require('../images/profile-view.svg')} style={{height:20, width:20, color:this.state.selected === 'user' ? '#069fba' : 'black'}}  />
+                        <h5 style={{fontWeight:'600'}}>PROFILE</h5>
                         </div>
                         </div>
                     </div>

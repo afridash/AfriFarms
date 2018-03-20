@@ -35,7 +35,7 @@ export default class Login extends Component {
           occupation:this.state.occupation
         }
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((user)=>{
-          this.usersRef.push(data, (error)=> {
+          this.usersRef.child(user.uid).update(data, (error)=> {
             if (!error) this.setState({redirect:true})
             else this.setState({error:error.message})
           })

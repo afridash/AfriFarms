@@ -26,7 +26,7 @@ export default class Dashboard extends Component {
        <div className='row'>
          {(()=>{
            if (this.state.incomplete) {
-             return ( <p>Welcome, {this.state.email}, click on user to complete your profile. </p>)
+             return ( <p>Welcome, {this.state.email}, click on PROFILE to complete your profile. </p>)
            }else{
              return this.showPageContent()
            }

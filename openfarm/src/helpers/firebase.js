@@ -4,7 +4,7 @@ import * as firebase from 'firebase'
     authDomain: "openfarm-db746.firebaseapp.com",
     databaseURL: "https://openfarm-db746.firebaseio.com",
     projectId: "openfarm-db746",
-    storageBucket: "",
+    storageBucket: "openfarm-db746.appspot.com",
     messagingSenderId: "601405019635"
   }
   export const Firebase = firebase.initializeApp(config)
