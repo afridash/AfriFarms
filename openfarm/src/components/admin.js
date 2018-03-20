@@ -13,7 +13,7 @@ export default class AdminHome extends Component {
      }
      firebase.auth().onAuthStateChanged(this.handleUser)
    }
-   handleUser = (user) => {
+  handleUser = (user) => {
      if (user){
        this.setState({displayName:user.displayName})
      }
@@ -23,7 +23,7 @@ export default class AdminHome extends Component {
       <div className="App">
         <div className='col-sm-12'>
           <div className='pull-left' style={{margin:20}}>
-            <p style={{fontSize:30 }}>Greetings, {this.state.displayName}</p>
+            <p style={{fontSize:30 }}>Welcome, {this.state.displayName}</p>
           </div>
           <div className='col-sm-12' style={{fontWeight:'500', fontSize:'20'}}>
             <div className='col-sm-4'>
