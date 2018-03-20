@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment'
+import { Link,Redirect, } from 'react-router-dom'
 import weather from 'yahoo-weather'
 import '../App.css';
 
@@ -145,8 +146,10 @@ export default class Dashboard extends Component {
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <img src={require('../images/chats.svg')} style={{height:30, width:30}}  />
-                          <h5>Chats</h5>
+                            <Link to="/notifications">
+                              <img src={require('../images/chats.svg')} style={{height:30, width:30}}  />
+                              <h5>Chats</h5>
+                            </Link>
                           </div>
                         </div>
                         <div className='col-sm-2' >

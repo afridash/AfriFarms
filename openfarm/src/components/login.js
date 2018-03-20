@@ -59,7 +59,7 @@ export default class Login extends Component {
 
                 <p style={{color:'red'}}>{this.state.error}</p>
                   <FormGroup>
-                    <Button className="pull-right" type="submit"  bsSize="medium" style={{...styles.button, backgroundColor:'#1babc7', fontSize:16, color:'white'}} onClick={(event) =>
+                    <Button className="pull-right" type="submit" bsStyle="" bsSize="large" style={styles.button} onClick={(event) =>
                       this.handleSubmit(event)}>Login</Button>
                     </FormGroup>
                     <div className="pull-left">
