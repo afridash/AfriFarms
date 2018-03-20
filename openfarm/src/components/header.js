@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
-import logo from '../openLogo.png';
+import {Link, Redirect} from 'react-router-dom'
+import logo from '../openLogo.png'
+import * as firebase from 'firebase'
+import {Firebase} from '../helpers/firebase'
 import '../App.css';
 
 export default class Header extends Component {
@@ -9,10 +11,24 @@ export default class Header extends Component {
       this.state =  {
         selected:'home',
       }
+    firebase.auth().onAuthStateChanged(this.handleUser)
+  }
+  handleUser = (user) => {
+    if (user) {
+      this.setState({loggedIn:true})
+    }
+  }
+  signOut () {
+    firebase.auth().signOut().then(() => {
+      this.setState({redirect:true, loggedIn:false})
+    }).catch((error)=> {
+      alert('There was an error logging out')
+    })
   }
   render() {
     return (
       <div className='App'>
+        {this.state.redirect && <Redirect to='/' push />}
         <div className='row hidden-xs' style={{backgroundColor:'#FAFAFA',border: '0.5px solid lightgrey', }}>
           <div className='row' style={{margin:10}}>
             <div className='col-md-3 col-sm-3'>
@@ -57,7 +73,7 @@ export default class Header extends Component {
                   REGISTER/LOGIN
                 </button>
               </Link>:
-                <button onClick={()=>this.setState({loggedIn:!this.state.loggedIn})} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
+                <button onClick={()=>this.signOut()} className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent'}}>
                   LOGOUT
                 </button>
               }
@@ -69,7 +85,7 @@ export default class Header extends Component {
       <nav className="navbar navbar-default" style={{backgroundColor:'#069fba'}}>
   <div className="container-fluid" style={{marginLeft:'8%'}}>
     <div className="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span className="sr-only">Toggle navigation</span>
         <span className="icon-bar"></span>
         <span className="icon-bar"></span>

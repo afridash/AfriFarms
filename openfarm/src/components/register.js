@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 import { Link,Redirect, } from 'react-router-dom'
+import * as firebase from 'firebase'
+import {Firebase} from '../helpers/firebase'
 import logo from '../openLogo.png';
 import '../App.css';
 
@@ -8,21 +10,51 @@ export default class Login extends Component {
   constructor (props) {
     super(props)
       this.state = {
-        username: '',
         password: '',
+        email:'',
         error: '',
+        state:'',
+        occupation:'',
         redirect:false,
       }
+      this.usersRef = firebase.database().ref().child('users')
   }
 
-  handleEmailChange (event) {
-    this.setState({email: event.target.value})
+  handleChange = (event) => {
+    this.setState({[event.target.name]: event.target.value})
   }
 
-  handlePasswordChange (event){
-    this.setState({password: event.target.value})
+  handleRegister (e) {
+    e.preventDefault()
+    this.setState({loading:true})
+    if (this.authenticateData()) {
+      if (this.verifyPasswords()) {
+        var data = {
+          email:this.state.email,
+          state:this.state.state,
+          occupation:this.state.occupation
+        }
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((user)=>{
+          this.usersRef.push(data, (error)=> {
+            if (!error) this.setState({redirect:true})
+            else this.setState({error:error.message})
+          })
+        }).catch((error)=> {
+          this.setState({error:error.message})
+        })
+      }else{
+        this.setState({error:'Passwords must match'})
+      }
+    }else{
+      this.setState({error:'Data fields cannnot be empty'})
+    }
   }
-
+  authenticateData () {
+    return this.state.email !== '' && this.state.password !== '' && this.state.state !== '' && this.state.occupation !== '' && this.state.password2 !== ''
+  }
+  verifyPasswords () {
+    return this.state.password === this.state.password2
+  }
   render() {
     return (
       <div className="App">
@@ -30,7 +62,7 @@ export default class Login extends Component {
           <div className="row" >
             <br/>
             <form>
-              <div className="col-sm-4 col-sm-offset-4" style={styles.box}>
+              <div className="col-sm-6 col-sm-offset-3" style={styles.box}>
                 <div>
                   <img src={logo} alt="logo" />
                 </div>
@@ -38,10 +70,10 @@ export default class Login extends Component {
                 <br/>
                 <FormGroup controlId="formControlsSelect">
                   <ControlLabel className="pull-left">Business Category</ControlLabel>
-                  <FormControl componentClass="select" placeholder="select">
+                  <FormControl name='occupation' onChange={this.handleChange} value={this.state.occupation} componentClass="select" placeholder="select">
                     <option value="select">Choose One</option>
-                    <option value="select">Farmer</option>
-                    <option value="other">Doctor</option>
+                    <option value="farmer">Farmer</option>
+                    <option value="doctor">Doctor</option>
                   </FormControl>
                 </FormGroup>
 
@@ -50,7 +82,8 @@ export default class Login extends Component {
                   <FormControl
                     className='form-control'
                     placeholder="Email"
-                    onChange = {this.handleEmailChange.bind(this)}
+                    name='email'
+                    onChange = {this.handleChange}
                   />
                 </FormGroup>
 
@@ -59,8 +92,9 @@ export default class Login extends Component {
                   <FormControl
                     className='form-control'
                     type="password"
+                    name='password'
                     placeholder="Password"
-                    onChange = {this.handlePasswordChange.bind(this)}
+                    onChange = {this.handleChange}
                   />
                 </FormGroup>
 
@@ -69,36 +103,41 @@ export default class Login extends Component {
                   <FormControl
                     className='form-control'
                     type="password"
+                    name='password2'
                     placeholder="Password again"
-                    onChange = {this.handlePasswordChange.bind(this)}
+                    onChange = {this.handleChange}
                   />
                 </FormGroup>
 
                 <br/>
-                <FormGroup>
-                  <FormControl
-                    className='form-control'
-                    type="text"
-                    placeholder="State"
-                  />
+                <FormGroup controlId="formControlsSelect2">
+                  <ControlLabel className="pull-left">State</ControlLabel>
+                  <FormControl name='state' onChange={this.handleChange} value={this.state.state} componentClass="select" placeholder="select">
+                    <option value="select">Choose One</option>
+                    <option value="akwa-ibom">Akwa-Ibom</option>
+                    <option value="bayelsa">Bayelsa</option>
+                    <option value="cross river">Cross River</option>
+                    <option value="delta">Delta</option>
+                    <option value="river state">River State</option>
+                  </FormControl>
                 </FormGroup>
-
                 <p style={{color:'red'}}>{this.state.error}</p>
-
                 <div>
                   <br/>
                   <p className="password">By clicking Register, you are indicating that you have read
                     and agree to the <Link to="/termsConditions">Terms & Conditions</Link> of using this service</p>
                 </div>
                   <FormGroup>
-                    <Button className="pull-right" type="submit" bsSize="medium" style={{backgroundColor:'#1babc7', margin:15, color:'white', fontSize:16}} onClick={(event) =>
-                      this.handleRegister(event)}>Register</Button>
-                      <Link to="/"><Button className="pull-left" type="button" bsSize="medium" style={styles.button}>No, thanks!</Button></Link>
+                    {this.state.loading  ? <Button className="pull-right" type="submit" bsSize="sm" style={{backgroundColor:'#1babc7', margin:15, color:'white', fontSize:16}}>Registering...</Button> : <Button className="pull-right" type="submit" bsSize="sm"
+                      style={{backgroundColor:'#1babc7', margin:15, color:'white', fontSize:16}} onClick={(event) =>
+                      this.handleRegister(event)}>Register</Button> }
+                      <Link to="/"><Button className="pull-left" type="button" bsSize="sm" style={styles.button}>No, thanks!</Button></Link>
                     </FormGroup>
                 </div>
               </form>
             </div>
         </div>
+        {this.state.redirect && <Redirect to='/dashboard' push /> }
       </div>
     );
   }
