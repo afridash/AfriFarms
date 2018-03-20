@@ -1,0 +1,110 @@
+.header-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.chat-body .answer-add {
+    clear: both;
+    position: relative;
+    margin: 5px 5px 5px;
+    padding: 0px;
+    bottom:0;
+    background: #ecf0f1;
+}
+.chat-body .answer-add input {
+    border: none;
+    background: none;
+    display: block;
+    height: 40px;
+    background: #fafafa;
+    color:black;
+    width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 0;
+}
+.chat input {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+.chat-body .answer.left .text {
+    background: white;
+    color: #333333;
+    border-radius: 20px 20px 20px 0;
+}
+.chat-body .answer .text {
+    padding: 8px;
+    font-size: 14px;
+    line-height: 16px;
+    position: relative;
+}
+.chat-body .answer.left .text:before {
+    left: -30px;
+    border-right-color: #ebebeb;
+    border-right-width: 12px;
+}
+.chat-body .answer .text:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    border: 18px solid transparent;
+    border-bottom-width: 0;
+}
+.chat-body .answer.left .time {
+    padding-left: 10px;
+    color: #333333;
+    font-style: italic;
+    font-weight: bold;
+}
+.chat-body .answer .time {
+    font-size: 10px;
+    line-height: 16px;
+    position: relative;
+    padding-bottom: 1px;
+}
+/*RIGHT*/
+.chat-body .answer.right {
+    padding: 2px 0 2px 0;
+    text-align: right;
+    float: right;
+}
+
+.chat-body .answer.right .avatar {
+    right: 0;
+}
+.chat-body .answer.right .avatar .status {
+    left: 4px;
+}
+.chat-body .answer.right .text {
+    background: #3498db;
+    color: #ffffff;
+    border-radius: 20px 20px 0 20px;
+}
+
+.chat-body .answer.right .time {
+  font-size: 10px;
+    padding-right: 10px;
+    color: #333333;
+}
+.chat {
+    height: calc(100vh - 180px);
+}
+.decor-default {
+    background-color: #ffffff;
+}
+.chat-users h6 {
+    font-size: 20px;
+    margin: 0 0 20px;
+}
+.chat-users .user {
+    position: relative;
+    padding: 0 0 0 50px;
+    display: block;
+    cursor: pointer;
+    margin: 0 0 20px;
+}
+.chat-users .user .avatar {
+    top: 0;
+    left: 0;
+}

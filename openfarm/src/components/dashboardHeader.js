@@ -364,13 +364,6 @@ export default class Dashboard extends Component {
                         <div className='col-sm-4'>
 
                         </div>
-
-                        <div className='col-sm-2'>
-                        <div className='column'>
-                        <img src={require('../images/add-user.svg')} style={{height:20, width:20}}  />
-                        <h5>New</h5>
-                        </div>
-                       </div>
                         <div className='col-sm-2' >
                           <div className='column'>
                           <img src={require('../images/report.svg')} style={{height:20, width:20}}  />
