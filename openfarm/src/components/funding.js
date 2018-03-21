@@ -1,104 +1,64 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import DashboardHeader from './dashboardHeader'
+import { Panel} from "react-bootstrap"
 import logo from '../logo.svg';
 import '../App.css';
 
 export default class Funding extends Component {
-  showPage() {
+  render() {
     return (
-      <div>
-        <ul className="nav nav-tabs">
-    <li className="active"><a data-toggle="tab" href="#home">All Funding</a></li>
-    <li><a data-toggle="tab" href="#menu1">Create New Funding</a></li>
-  </ul>
+      <div className="col-sm-10 col-sm-offset-1" >
+        <div className="row">
+          <h3 className="pull-left" style={{fontSize:40, fontWeight:'600', marginBottom:'3%'}}>Funding</h3>
+        </div>
+        <div>
+          <div className='col-sm-10 col-sm-offset-1'>
+            <Panel id="collapsible-panel-example-2">
+              <Panel.Heading>
+                <Panel.Title toggle style={{textAlign:'left'}}>
+                  Bill and Melinda Gates Farmers Funding Grant for young farmers <span className='pull-right'><Link to ='/fundingapp'>Apply</Link></span>
+                </Panel.Title>
+              </Panel.Heading>
+              <Panel.Collapse>
+                <Panel.Body>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life
+                  accusamus terry richardson ad squid. Nihil anim keffiyeh
+                  helvetica, craft beer labore wes anderson cred nesciunt sapiente
+                  <span className='pull-right'>
+                    <img src={require('../images/plus.png')} style={{height:15, width:15}} />
+                  </span>
 
-  <div className="tab-content">
-    <div id="home" className="tab-pane fade in active">
-    <div className='row'>
-      <div className='col-sm-7'>
-          <div className='col-sm-12' style={{marginTop:20,}}>
-            <Link to='/viewfunding'>
-            <p style={{borderRadius:2, borderColor:'black', backgroundColor:'lightgrey', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
-              &nbsp;United Nations Feed The World Fund
-              <span  className='pull-right' style={{backgroundColor:'#00abc9', fontSize:25}}>&nbsp;&nbsp;30&nbsp;&nbsp;</span></p>
-</Link>
-      </div>
-          <div className='col-sm-12' style={{marginTop:5,}}>
-            <Link to='/viewfunding'>
-            <p style={{borderRadius:2, borderColor:'black', backgroundColor:'lightgrey', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
-              &nbsp;Nigeria Farmers Association Grant
-              <span  className='pull-right' style={{backgroundColor:'#00abc9', fontSize:25}}>&nbsp;&nbsp;30&nbsp;&nbsp;</span></p>
-            </Link>
+                  ea proident.
+                </Panel.Body>
+              </Panel.Collapse>
+            </Panel>
           </div>
-          <div className='col-sm-12' style={{marginTop:5,}}>
-            <Link to='/viewfunding'>
-            <p style={{borderRadius:2, borderColor:'black', backgroundColor:'lightgrey', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
-              &nbsp;Nigeria Farmers Association Grant
-              <span  className='pull-right' style={{backgroundColor:'#00abc9', fontSize:25}}>&nbsp;&nbsp;30&nbsp;&nbsp;</span></p>
-            </Link>
-          </div>
-    </div>
-  </div>
-    </div>
-    <div id="menu1" className="tab-pane fade">
-      <div className="row" style={{marginTop:20}}>
-              <div className="col-md-7">
-              <form role="form" action="" method="post">
-              <div className="form-group">
-                <div className='col-sm-4'>
-                  <label htmlFor="sel1">Funding Type</label>
-                </div>
-              <div className='col-sm-8'>
-                <select className="form-control"  name="form">
-                    <option value='' ></option>
-                     <option value='hi' >hi</option>
-                      <option value='hi' >hi</option>
-                       <option value='hi' >hi</option>
-                </select>
-              </div>
+          <div className='col-sm-10 col-sm-offset-1'>
+            <Panel id="collapsible-panel-example-2">
+              <Panel.Heading>
+                <Panel.Title toggle style={{textAlign:'left'}}>
+                  Technology in farming Grant <span className='pull-right'><Link to ='/fundingapp'>Apply</Link></span>
+                </Panel.Title>
+              </Panel.Heading>
+              <Panel.Collapse>
+                <Panel.Body>
+                  Technology is changing the face of everything in the world. Farming has been since the existence of man.
+                   But moving forward, we look at how we can implement new technologies in the farming space. This grant is
+                    meant to support a young farmer between the ages of 18 - 45. The grant provides $45,000 to be used by
+                    the farmer in farm crop and animal production. The Deadline for the application is:  20/04/2018
+                  <span className='pull-right'>
+                    <img src={require('../images/plus.png')} style={{height:15, width:15}} />
+                  </span>
 
-              <br />
-              </div>
-              </form>
-              <div className='row' style={{marginTop:40}}>
-                <div className='col-sm-4'>
-                  <label htmlFor="description">Description</label>
-                </div>
-                <div className='col-sm-8'>
-                  <textarea rows="8" cols="55"> </textarea>
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div className="col-md-3">
-                  <label htmlFor="questions">Questions</label>
-                </div>
-              </div>
-              <div className="col-md-12" style={{marginLeft:30}}>
-                <div className="form-group">
-                  <input type="text"  className="form-control"  style={{color:'white', border:'1px solid grey'}} />
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div className="col-md-3" style={{marginTop:-10}} >
-                  <span>add questions</span>
-              </div>
+                  ea proident.
+                </Panel.Body>
+              </Panel.Collapse>
+            </Panel>
           </div>
-          <div className='col-md-12'>
-              <button className='btn btn-primary' style={{backgroundColor:'#069fba',borderColor:'transparent', fontSize:15}}>
-                Submit
-              </button>
-          </div>
-              </div>
-    </div>
-  </div>
-</div>
+
+        </div>
       </div>
     )
   }
-  render() {
-    return (
-      <DashboardHeader children={this.showPage()} />
-    );
-  }
+  
 }

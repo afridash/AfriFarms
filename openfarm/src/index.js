@@ -20,11 +20,14 @@ import Register from './components/register'
 import AdminHome from './components/admin'
 import GeneralNews from './components/generalNews'
 import Profile from './components/profile'
-import Search from './components/search'
 import Market from './components/market'
 import Sell from './components/sell'
+import Storage from './components/storage'
 import Cart from './components/cart'
 import Training from './components/training'
+import Search from './components/search'
+import FundingApp from './components/fundingapp'
+import AdminView from './components/adminView'
 import './index.css'
 render((
   //Render different routes
@@ -40,8 +43,9 @@ render((
       <Route exact path={"/admin/funding"} component={Funding} />
       <Route exact path={"/admin/training"} component={AdminTraining} />
       <Route exact path={"/dashboard"} component={Dashboard} />
-      <Route exact path={"/chats"} component={Notifications} />
+      <Route exact path={"/notifications"} component={Notifications} />
       <Route exact path={"/admin/storage"} component={AdminStorage} />
+      <Route exact path={"/chats"} component={Notifications} />
       <Route exact path={"/login"} component={Login} />
       <Route exact path={"/admin"} component={AdminHome} />
       <Route exact path={"/register"} component={Register} />
@@ -54,6 +58,9 @@ render((
       <Route exact path={"/viewfunding"} component={ViewFunding} />
       <Route exact path={"/funding"} component={GeneralFunding} />
       <Route exact path={"/training"} component={Training} />
+      <Route exact path={"/storage"} component={Storage} />
+      <Route exact path={"/fundingapp"} component={FundingApp} />
+      <Route exact path={"/adminview"} component={AdminView} />
     </Header>
       </Switch>
     </div>
