@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
 import '../App.css';
@@ -51,9 +52,16 @@ export default class Home extends Component {
                 <p style={{fontSize:20}}>Trainings</p>
               </div>
             </div>
+            <div className='col-sm-4'>
+              <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
+                <Link to='/sell'>
+                <img src={require('../images/showcase.svg')} style={{padding:20, height:100, width:100}}  />
+                <p style={{fontSize:20}}>Showcase and Sell</p>
+                </Link>
+              </div>
+            </div>
           </div>
-        </div>
-
+          </div>
       </div>
     );
   }

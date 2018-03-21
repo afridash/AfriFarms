@@ -110,6 +110,11 @@ export default class Header extends Component {
           </div>
         </form>
       </ul>
+      {/* <div className='pull-right' style={{margin:5}}>
+        <Link  to='/cart'>
+        <img src={require('../images/cart.png')} style={{ height:40, width:40}} />
+        </Link>
+      </div> */}
 
     </div>
   </div>

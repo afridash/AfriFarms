@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import {Firebase} from '../helpers/firebase'
 import '../App.css';
 
-export default class Storage extends Component {
+export default class AdminStorage extends Component {
   constructor(props) {
     super(props)
     this.state = {
