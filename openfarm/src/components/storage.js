@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment'
+import DashboardHeader from './dashboardHeader'
 import * as firebase from 'firebase'
 import {Link} from 'react-router-dom'
 import {Firebase} from '../helpers/firebase'
@@ -110,6 +111,10 @@ export default class Storage extends Component {
     )
   }
   render() {
-    return this.showPage()
+    return (
+      <div className="App">
+        <DashboardHeader children={this.showPage()} />
+      </div>
+    );
   }
 }

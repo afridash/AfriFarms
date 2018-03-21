@@ -7,7 +7,11 @@ export default class FundingApp extends Component {
   render() {
     return (
       <div className="App">
-        
+        <div className='row'>
+          <div className='col-sm-10 col-sm-offset-1' style={{backgroundColor:'#00abc9'}}>
+            <p style={{fontSize:25, marginTop:'1%',color:'white'}}>Bill and Melinda Gates Farmers Funding Grant for young farmers</p>
+          </div>
+        </div>
         <div className='row'>
           <div className='col-sm-10 col-sm-offset-1' style={{ border:'1px solid lightgrey'}}>
             <div className='row' style={{fontSize:20, margin:'2%'}}>
