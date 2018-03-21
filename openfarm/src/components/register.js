@@ -116,9 +116,9 @@ export default class Login extends Component {
                     <option value="select">Choose One</option>
                     <option value="akwa-ibom">Akwa-Ibom</option>
                     <option value="bayelsa">Bayelsa</option>
-                    <option value="cross river">Cross River</option>
+                    <option value="cross river">Cross Rivers</option>
                     <option value="delta">Delta</option>
-                    <option value="river state">River State</option>
+                    <option value="river state">Rivers State</option>
                   </FormControl>
                 </FormGroup>
                 <p style={{color:'red'}}>{this.state.error}</p>
