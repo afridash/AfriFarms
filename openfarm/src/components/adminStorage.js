@@ -12,10 +12,14 @@ export default class AdminStorage extends Component {
       title:'',
       description:'',
       location:'',
-      storages:[]
+      storages:[],
+      users:[]
     }
+    this.users = []
     this.storages = []
     this.ref = firebase.database().ref().child('storages')
+    this.usersRef = firebase.database().ref().child('users')
+    this.badgesRef = firebase.database().ref().child('badges')
     firebase.auth().onAuthStateChanged(this.handleUser)
   }
   handleUser = (user) => {
@@ -34,6 +38,15 @@ export default class AdminStorage extends Component {
       })
       this.setState({storages:this.storages})
     })
+    this.usersRef.once('value', (users)=> {
+      users.forEach((user)=> {
+        this.users.push({
+          key:user.key,
+          displayName:user.val().displayName
+        })
+      })
+      this.setState({users:this.users})
+    })
   }
   saveStorage () {
     this.setState({loading:true})
@@ -49,6 +62,18 @@ export default class AdminStorage extends Component {
       }
       var item = this.ref.push()
       item.setWithPriority(data, 0 - Date.now())
+      this.state.users.forEach((user)=>{
+        data = {
+          title: "Storage Location -- " + this.state.title,
+          message: "Dear " +  user.displayName + ", a new storage location was added by " + this.state.displayName + ".",
+          createdAt:firebase.database.ServerValue.TIMESTAMP
+        }
+        firebase.database().ref().child('notifications').child(user.key).push(data)
+        this.badgesRef.child(user.key).child('notificationsBadges').once('value', (badgeCount)=>{
+          if (badgeCount.val()) badgeCount.ref.set(badgeCount.val()+1)
+          else badgeCount.ref.set(1)
+        })
+      })
       this.setState({error:'', title:'', location:'', description:'', loading:false, saved:true})
     }else{
       this.setState({error:'Fields cannot be empty', loading:false})

@@ -17,12 +17,16 @@ export default class AdminTraining extends Component {
       editorState: EditorState.createEmpty(),
       videos:[],
       articles:[],
+      users:[]
     }
+    this.users = []
     this.videos = []
     this.articles = []
     this.onChange = (editorState) => this.setState({editorState})
+    this.badgesRef = firebase.database().ref().child('badges')
     this.ref = firebase.database().ref().child('trainings')
     firebase.auth().onAuthStateChanged(this.handleUser)
+    this.usersRef = firebase.database().ref().child('users')
   }
   onContentStateChange = (content) => {
     var json = JSON.stringify(content)
@@ -40,6 +44,15 @@ export default class AdminTraining extends Component {
         this.videos.push({title:post.val().title, url:post.val().url, createdBy:post.val().createdBy})
         this.setState({videos:this.videos})
       }
+    })
+    this.usersRef.once('value', (users)=> {
+      users.forEach((user)=> {
+        this.users.push({
+          key:user.key,
+          displayName:user.val().displayName
+        })
+      })
+      this.setState({users:this.users})
     })
   }
   handleUser = (user) => {
@@ -136,6 +149,18 @@ export default class AdminTraining extends Component {
       }
       var item = this.ref.push()
       item.setWithPriority(data, 0 - Date.now())
+      this.state.users.forEach((user)=>{
+        data = {
+          title: "New Training -- " + this.state.title,
+          message: "Dear " +  user.displayName + ", a new training video was added by " + this.state.displayName + ".",
+          createdAt:firebase.database.ServerValue.TIMESTAMP
+        }
+        firebase.database().ref().child('notifications').child(user.key).push(data)
+        this.badgesRef.child(user.key).child('notificationsBadges').once('value', (badgeCount)=>{
+          if (badgeCount.val()) badgeCount.ref.set(badgeCount.val()+1)
+          else badgeCount.ref.set(1)
+        })
+      })
       this.setState({loading:false, saved:true, title:'', url:'', error:''})
     }else{
       this.setState({error:'URL and title must be filled', loading:false})
@@ -155,6 +180,18 @@ export default class AdminTraining extends Component {
       }
       var item = this.ref.push()
       item.setWithPriority(data, 0 - Date.now())
+      this.state.users.forEach((user)=>{
+        data = {
+          title: "New Training -- " + this.state.title,
+          message: "Dear " +  user.displayName + ", a new training article was added by " + this.state.displayName + ".",
+          createdAt:firebase.database.ServerValue.TIMESTAMP
+        }
+        firebase.database().ref().child('notifications').child(user.key).push(data)
+        this.badgesRef.child(user.key).child('notificationsBadges').once('value', (badgeCount)=>{
+          if (badgeCount.val()) badgeCount.ref.set(badgeCount.val()+1)
+          else badgeCount.ref.set(1)
+        })
+      })
       this.setState({loading:false, saved:true, title:'', url:'', editorState:EditorState.createEmpty(), error:''})
     }else{
       this.setState({error:'Title, and article cannot be empty', loading:false})

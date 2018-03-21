@@ -15,11 +15,15 @@ export default class Funding extends Component {
       questions:[],
       post:'',
       title:'',
-      funds:[]
+      funds:[],
+      users:[]
     }
+    this.users = []
     this.onChange = (editorState) => this.setState({editorState})
     this.questions = []
     this.funds = []
+    this.usersRef = firebase.database().ref().child('users')
+    this.badgesRef = firebase.database().ref().child('badges')
     this.ref = firebase.database().ref().child('funds')
     firebase.auth().onAuthStateChanged(this.handleUser)
   }
@@ -30,6 +34,15 @@ export default class Funding extends Component {
         applicants:fund.val().applicants
       })
       this.setState({funds:this.funds})
+    })
+    this.usersRef.once('value', (users)=> {
+      users.forEach((user)=> {
+        this.users.push({
+          key:user.key,
+          displayName:user.val().displayName
+        })
+      })
+      this.setState({users:this.users})
     })
   }
   handleUser = (user) => {
@@ -89,6 +102,18 @@ export default class Funding extends Component {
       }
       var item = this.ref.push()
       item.setWithPriority(data, 0 - Date.now())
+      this.state.users.forEach((user)=>{
+        data = {
+          title: "Funding Opportunity -- " + this.state.title,
+          message: "Dear " +  user.displayName + ", a new funding opportunity was added by " + this.state.displayName + ".",
+          createdAt:firebase.database.ServerValue.TIMESTAMP
+        }
+        firebase.database().ref().child('notifications').child(user.key).push(data)
+        this.badgesRef.child(user.key).child('notificationsBadges').once('value', (badgeCount)=>{
+          if (badgeCount.val()) badgeCount.ref.set(badgeCount.val()+1)
+          else badgeCount.ref.set(1)
+        })
+      })
       this.setState({loading:false, saved:true, title:'', editorState:EditorState.createEmpty(), fundType:'', questions:[]})
     }else{
       this.setState({error:'Fields cannot be empty', loading:false})

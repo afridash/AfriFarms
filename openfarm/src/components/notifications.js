@@ -51,11 +51,14 @@ export default class Notifications extends Component {
        conversations:[],
        attachment:'',
        messages:[],
-       users:[]
+       users:[],
+       notifs:[]
      }
+     this.notifs = []
      firebase.auth().onAuthStateChanged(this.handleUser)
      this.chatFriend = firebase.database().ref().child('users')
      this.mRef = firebase.database().ref().child('direct_messages')
+     this.notificationsRef = firebase.database().ref().child('notifications')
      this.conversationsRef = firebase.database().ref().child('recent_chats')
      this.messagesList = []
      this.friends = []
@@ -63,7 +66,7 @@ export default class Notifications extends Component {
      this.users = []
      this.user = {}
    }
-   componentWillMount () {
+   async componentWillMount () {
      this.chatFriend.once('value', (users)=> {
        users.forEach((user)=> {
          this.users.push({
@@ -75,6 +78,7 @@ export default class Notifications extends Component {
        })
        this.setState({users:this.users})
      })
+
    }
   changeFriend (convo) {
      if (this.messagesRef !== '') this.messagesRef.off()
@@ -87,7 +91,8 @@ export default class Notifications extends Component {
        messages:[],
        media:[],
        show:false,
-       showChats:true
+       showChats:true,
+       showNotifs:false
      })
      this.messagesList = []
      this.messageAddedListener(convo.userKey)
@@ -115,9 +120,22 @@ export default class Notifications extends Component {
       this.user = user
       this.messageAddedListener ('')
       this.getConversations()
+      this.getNotifications(user.uid)
       this.listenConversationChange ()
       this.setState({userPicture:user.photoURL, userId:user.uid})
     }
+  }
+  async getNotifications (userId) {
+    await this.notificationsRef.child(userId).once('value', (notifs)=> {
+      notifs.forEach((notif)=> {
+        this.notifs.push({
+          title:notif.val().title,
+          message:notif.val().message,
+          createdAt:notif.val().createdAt
+        })
+      })
+      this.setState({notifs:this.notifs})
+    })
   }
   getConversations () {
     this.conversations = []
@@ -207,6 +225,7 @@ export default class Notifications extends Component {
       show:false,
       showStartNew:false,
       showChats:true,
+      showNotifs:false,
     })
     this.messagesList = []
     this.messageAddedListener(user.key)
@@ -225,7 +244,7 @@ export default class Notifications extends Component {
        <div key={1} className='col-sm-8 col-sm-offset-2'>
         <div>
           <div style={{backgroundColor:'#039be5', height:60, padding:10}}>
-            <span onClick={()=>this.setState({startNew:false, opacity:0})}  style={{color:'white', marginTop:15, cursor:'pointer', fontSize:16}} className='fa fa-arrow-left fa-4x lead pull-left'> Back</span>
+            <span onClick={()=>this.setState({showStartNew:false, opacity:0})}  style={{color:'white', marginTop:15, cursor:'pointer', fontSize:16}}> Back</span>
           </div>
           <div style={{height:55, backgroundColor:'#039be5', }}>
             <input style={styles.searchbox} name="msg" onChange={(event)=> this.searchFriends(event.target.value)} placeholder="Search friends" />
@@ -318,6 +337,9 @@ export default class Notifications extends Component {
 
     }
    }
+   showNotifcation (notif) {
+     this.setState({showNotifs:true, showChats:false, currentTitle:notif.title, currentMessage:notif.message, currentTime:notif.createdAt})
+   }
   showPage () {
      return (
        <div className='col-md-12'>
@@ -335,8 +357,9 @@ export default class Notifications extends Component {
                    title="NOTIFICATION">
                    <div className='col-sm-12'>
                      <br/>
-                     <Well onClick={()=>this.setState({showNotifs:!this.state.showNotifs, showChats:false})} bsSize="sm">ANOTHER IMPORTANT MESSAGE: And this is the body of the message ...</Well>
-                     <Well bsSize="small">THIS IS THE TITILE MESSAGE: And this is the body of the message ...</Well>
+                     {this.state.notifs.map((notif)=>
+                       <Well onClick={()=>this.showNotifcation(notif)} bsSize="sm">{notif.title}</Well>
+                     )}
                    </div>
                  </Tab>
                </Tabs>
@@ -345,7 +368,10 @@ export default class Notifications extends Component {
            {this.state.showChats &&
            <div className='col-md-5 col-sm-12'>
              <div className='col-sm-12' style={{backgroundColor:'#FAFAFA', marginTop:-20}}>
-               <div className='col-sm-8 col-sm-offset-2'>
+               <div className='col-sm-12'>
+                 <Link className='pull-right' onClick={()=>this.setState({showChats:false})} to='#' style={{textDecoration:false}}>
+                   <span style={{fontSize:14}} className='fa fa-times pull-right'></span>
+                 </Link>
                  <div className='row' style={{padding:10}}>
                    <div className="col-sm-3">
                      <img src={this.state.profilePicture} style={{width:50, height:50, borderRadius:25}} alt="profilePic"/>
@@ -374,17 +400,21 @@ export default class Notifications extends Component {
            {this.state.showNotifs &&
            <div className='col-md-5 col-sm-12'>
              <div className='col-sm-12' style={{backgroundColor:'#FAFAFA', marginTop:-20}}>
-               <div className='col-sm-8 col-sm-offset-2'>
+               <div className='col-sm-12'>
+                 <Link className='pull-right' onClick={()=>this.setState({showNotifs:false})} to='#' style={{textDecoration:false}}>
+                   <span style={{fontSize:14}} className='fa fa-times pull-right'></span>
+                 </Link>
                  <div className='row' style={{padding:10}}>
                  <div style={{lineHeight:1}} className="col-sm-10 col-sm-offset-1">
-                  <p>This is title of the subject</p>
+                  <p>{this.state.currentTitle}</p>
                  </div>
                  </div>
                </div>
              </div>
              <div className='chat col-sm-12'  style={{backgroundColor:'#EEEEEE', height:500}}>
                <div className='chat-body' ref={(div) => {this.divList = div; }} style={{height:450, overflowX:'scroll'}}>
-                 <p>Hello World</p>
+                 <p style={{padding:10}}>{this.state.currentMessage}</p>
+                 <i>Sent: {moment(this.state.currentTime).format('L')}</i>
                </div>
              </div>
            </div> }

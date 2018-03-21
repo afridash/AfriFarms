@@ -16,11 +16,15 @@ export default class News extends Component {
       uploadedImages:[],
       editorState: EditorState.createEmpty(),
       news:[],
+      users:[]
     }
     this.news = []
     firebase.auth().onAuthStateChanged(this.handleUser)
     this.ref = firebase.database().ref().child('newsroom')
+    this.badgesRef = firebase.database().ref().child('badges')
     this.onChange = (editorState) => this.setState({editorState})
+    this.usersRef = firebase.database().ref().child('users')
+    this.users = []
   }
   handleUser = (user) => {
     if (user) {
@@ -36,6 +40,15 @@ export default class News extends Component {
         createdAt:news.val().createdAt
       })
       this.setState({news:this.news})
+    })
+    this.usersRef.once('value', (users)=> {
+      users.forEach((user)=> {
+        this.users.push({
+          key:user.key,
+          displayName:user.val().displayName
+        })
+      })
+      this.setState({users:this.users})
     })
   }
   onContentStateChange = (content) => {
@@ -65,6 +78,19 @@ export default class News extends Component {
         }
         var item = this.ref.push()
         item.setWithPriority(data,0 - Date.now())
+
+        this.state.users.forEach((user)=>{
+          data = {
+            title: "New Article -- " +this.state.title,
+            message: "Dear " +  user.displayName + ", a news article was added by " + this.state.displayName + ".",
+            createdAt:firebase.database.ServerValue.TIMESTAMP
+          }
+          firebase.database().ref().child('notifications').child(user.key).push(data)
+          this.badgesRef.child(user.key).child('notificationsBadges').once('value', (badgeCount)=>{
+            if (badgeCount.val()) badgeCount.ref.set(badgeCount.val()+1)
+            else badgeCount.ref.set(1)
+          })
+        })
         this.setState({editorState:EditorState.createEmpty(), title:'', fileName:'', loading:false, saved:true})
       }).catch((e)=> {
         this.setState({error:'Unable to upload thumbnail', loading:false, saved:false})
