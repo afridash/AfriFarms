@@ -105,7 +105,10 @@ export default class Notifications extends Component {
     this.divList.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
   }
   componentDidUpdate() {
-    //this.scrollToBottom();
+    if (this.state.showChats) {
+      this.scrollToBottom();
+    }
+
   }
   handleUser = (user)=> {
     if(user){
@@ -208,6 +211,15 @@ export default class Notifications extends Component {
     this.messagesList = []
     this.messageAddedListener(user.key)
   }
+  searchFriends (text) {
+    if (text === '') this.setState({users:this.users, noFriends:false})
+    else {
+      var results = this.users.filter ((friend) => friend.displayName.toLowerCase().includes(text.toLowerCase()))
+      if (results.length > 0)
+      this.setState({users:results, noFriends:false})
+      else this.setState({noFriends:true})
+    }
+  }
   startNew () {
     return (
        <div key={1} className='col-sm-8 col-sm-offset-2'>
@@ -227,8 +239,8 @@ export default class Notifications extends Component {
               <div className="user">
               <div className="col-sm-4">
               <img alt={user.displayName} src={user.profilePicture} style={{width:50, height:50, borderRadius:25}} /></div>
-              <div className="col-sm-8 text-left">{user.displayName}</div>
-              <div className="text-left">Click to start</div>
+              <div className="col-sm-8" style={{textAlign:'left', marginLeft:-15}}>{user.displayName}</div>
+              <div style={{textAlign:'left'}}>Click to start</div>
               </div>
             </Link>
             )}
@@ -244,10 +256,9 @@ export default class Notifications extends Component {
     return (
       <div key={key} className={message.classStyle} style={{zIndex:100}} >
         {message.dateChanged &&  <p style={{right:100}}>{message.date}</p>}
-        <div className="text pull-right">
-          {message.message}
+          <p className="text">{message.message}
           <span className="time" style={{marginLeft:5}}>{message.timestamp}</span>
-        </div>
+        </p>
     </div>
     )
   }
@@ -259,8 +270,9 @@ export default class Notifications extends Component {
           <div className='col-sm-9'>
             <p>No conversations </p>
           </div>
-          <Link onClick={()=>this.setState({showStartNew:true})} to='#' className='col-sm-3'>
-            <span style={{fontSize:16}} className='fas fa-user-plus'></span>
+          <Link style={{textDecoration:'none'}} onClick={()=>this.setState({showStartNew:true})} to='#' className='col-sm-3'>
+            <span> New &nbsp;&nbsp;</span>
+            <span style={{fontSize:20}} className='fas fa-comments'></span>
           </Link>
         </div>
         </div>
@@ -270,7 +282,8 @@ export default class Notifications extends Component {
         <div className='col-sm-12'>
           <div className='col-sm-8 col-sm-offset-2' style={{margin:20}}>
             <Link onClick={()=>this.setState({showStartNew:true})} to='#'>
-              <span style={{fontSize:20}} className='fas fa-user-plus pull-right'></span>
+              <span style={{fontSize:20}} className='fas fa-comments pull-right'></span>
+              <span className='pull-right'> New &nbsp;&nbsp;</span>
             </Link>
           </div>
           <div className='cols-sm-12'>
@@ -286,6 +299,7 @@ export default class Notifications extends Component {
                 <div className='col-sm-5 text-left'>
                   <div className='column'>
                      <p style={{fontSize: 16, fontWeight: '600', fontFamily: 'verdana'}}>{convo.sender}</p>
+                     <span>{convo.message}</span>
                   </div>
                 </div>
                 <div className='col-sm-5 text-left'>
@@ -319,7 +333,7 @@ export default class Notifications extends Component {
                  </Tab>
                  <Tab eventKey={2}
                    title="NOTIFICATION">
-                   <div className='row'>
+                   <div className='col-sm-12'>
                      <br/>
                      <Well bsSize="sm">ANOTHER IMPORTANT MESSAGE: And this is the body of the message ...</Well>
                      <Well bsSize="small">THIS IS THE TITILE MESSAGE: And this is the body of the message ...</Well>
@@ -330,21 +344,21 @@ export default class Notifications extends Component {
            </div>
            {this.state.showChats &&
            <div className='col-md-5 col-sm-12'>
-             <div className='row' style={{backgroundColor:'#FAFAFA', marginTop:-20}}>
+             <div className='col-sm-12' style={{backgroundColor:'#FAFAFA', marginTop:-20}}>
                <div className='col-sm-8 col-sm-offset-2'>
-                 <div className='row'>
+                 <div className='row' style={{padding:10}}>
                    <div className="col-sm-3">
                      <img src={this.state.profilePicture} style={{width:50, height:50, borderRadius:25}} alt="profilePic"/>
                    </div>
                  <div style={{lineHeight:1, lineSpace:1,}} className="col-sm-9">
-                  <p>{this.state.displayName}</p>
+                  <p style={{fontWeight:'600'}}>{this.state.displayName}</p>
                   <i>{this.state.produce}</i>
                  </div>
                  </div>
                </div>
              </div>
-             <div className='row' ref={(div) => {this.divList = div}} style={{backgroundColor:'#EEEEEE', position:'relative', minHeight:400}}>
-               <div className='chat-body'>
+             <div className='chat col-sm-12'  style={{backgroundColor:'#EEEEEE', height:500}}>
+               <div className='chat-body' ref={(div) => {this.divList = div; }} style={{height:450, overflowX:'scroll'}}>
                  {this.state.messages.map((message, key)=> this.showMessage(message, key))}
                </div>
                <div className='header-content' >

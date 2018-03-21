@@ -97,7 +97,7 @@ export default StyleSheet.create({
         "left": 4
     },
     "chat-body answerright text": {
-        "background": "#3498db",
+        "background": "#00abc9",
         "color": "#ffffff",
         "borderRadius": "20px 20px 0 20px"
     },
@@ -135,5 +135,19 @@ export default StyleSheet.create({
     "chat-users user avatar": {
         "top": 0,
         "left": 0
+    },
+    "chat-body answer": {
+        "position": "relative",
+        "maxWidth": 600,
+        "overflow": "hidden",
+        "clear": "both"
+    },
+    "chat-body answerleft": {
+        "paddingTop": 2,
+        "paddingRight": 0,
+        "paddingBottom": 2,
+        "paddingLeft": 0,
+        "textAlign": "left",
+        "float": "left"
     }
 });

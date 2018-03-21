@@ -275,9 +275,9 @@ export default class Dashboard extends Component {
     return (
       <div className="App">
         <div className='row' style={{marginTop:-20, }}>
-          <div className='col-md-3' style={{fontSize:20, backgroundColor:'#eeeeee',}}>
+          <div className='col-md-3' style={{backgroundColor:'#eeeeee'}}>
             <div className='row'>
-              <div  style={{backgroundColor:'#eeeeee', padding:10, margin:5}}>
+              <div  style={{backgroundColor:'#eeeeee', padding:10, margin:5, height:600}}>
               <div className='panel-body'>
                 <div className='row'>
                   <div className="pull-right" style={{fontSize:15}}>{moment().format('LLLL')}</div>
@@ -372,7 +372,7 @@ export default class Dashboard extends Component {
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                            <Link to="/chats">
+                            <Link to="/chats" style={{color:'black', textDecoration:'none'}}>
                               <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
                               <h5>Chats</h5>
                             </Link>

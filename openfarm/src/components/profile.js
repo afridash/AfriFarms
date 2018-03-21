@@ -18,7 +18,7 @@ export default class Profile extends Component {
   }
   handleUser = (user) => {
     if (user) {
-      this.setState({displayName:user.displayName, userId:user.uid, profilePicture:user.photoURL})
+      this.setState({userId:user.uid, profilePicture:user.photoURL})
     }
   }
   componentWillReceiveProps ( newProps ) {
@@ -33,6 +33,7 @@ export default class Profile extends Component {
         bio:user.val().bio,
         email:user.val().email,
         state:user.val().state,
+        displayName:user.val().displayName,
         profilePicture:user.val().profilePicture,
       })
     })
