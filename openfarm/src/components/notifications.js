@@ -60,13 +60,14 @@ export default class Notifications extends Component {
      this.mRef = firebase.database().ref().child('direct_messages')
      this.notificationsRef = firebase.database().ref().child('notifications')
      this.conversationsRef = firebase.database().ref().child('recent_chats')
+     this.badgesRef = firebase.database().ref().child('badges')
      this.messagesList = []
      this.friends = []
      this.messagesRef = ''
      this.users = []
      this.user = {}
    }
-   async componentWillMount () {
+  async componentWillMount () {
      this.chatFriend.once('value', (users)=> {
        users.forEach((user)=> {
          this.users.push({
@@ -78,7 +79,6 @@ export default class Notifications extends Component {
        })
        this.setState({users:this.users})
      })
-
    }
   changeFriend (convo) {
      if (this.messagesRef !== '') this.messagesRef.off()
@@ -123,6 +123,7 @@ export default class Notifications extends Component {
       this.getNotifications(user.uid)
       this.listenConversationChange ()
       this.setState({userPicture:user.photoURL, userId:user.uid})
+      this.badgesRef.child(user.uid).remove()
     }
   }
   async getNotifications (userId) {

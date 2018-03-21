@@ -11,12 +11,21 @@ export default class Home extends Component {
        width:0,
        height:0
      }
+     this.badgesRef = firebase.database().ref().child('badges')
      firebase.auth().onAuthStateChanged(this.handleUser)
    }
    handleUser = (user) => {
      if (user){
        this.setState({displayName:user.displayName})
+       this.getBadges(user.uid)
      }
+   }
+   getBadges (userId) {
+     this.badgesRef.child(userId).once('value', (notifs)=> {
+       notifs.forEach((notif)=> {
+         this.setState({[notif.key] : notif.val()})
+       })
+     })
    }
   render() {
     return (
@@ -29,13 +38,14 @@ export default class Home extends Component {
             <Link to='/chats' className='col-sm-4' style={{textDecoration:'none'}}>
               <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
                 <img src={require('../images/messages.svg')} style={{padding:20, height:100, width:100}} />
-                <p style={{fontSize:20}}>Messages</p>
+                <p style={{fontSize:20}}>Messages <span className='text-danger'>{this.state.messagesBadge}</span></p>
+
               </div>
             </Link>
             <Link style={{textDecoration:'none'}} to='/chats' className='col-sm-4'>
               <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
               <img src={require('../images/list-produce-icon.svg')} style={{padding:20, height:100, width:100}} />
-              <p style={{fontSize:20}}>Notifications</p>
+              <p style={{fontSize:20}}>Notifications <span className='text-danger'>{this.state.notificationsBadges}</span></p>
             </div>
           </Link>
             <div className='col-sm-4'>
