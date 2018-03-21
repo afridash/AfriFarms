@@ -13,7 +13,8 @@ export default class GeneralNews extends Component {
     super(props)
     this.state = {
       news:[],
-      post:EditorState.createEmpty()
+      post:EditorState.createEmpty(),
+      loading:true,
     }
     this.news = []
     this.newsroomRef = firebase.database().ref().child('newsroom')
@@ -37,9 +38,9 @@ export default class GeneralNews extends Component {
       showModal:true,
     })
   }
-  render() {
+  showPage () {
     return (
-      <div className="App">
+      <div style={{cursor:'pointer'}}>
         <div className="row" style={{marginTop:20}}>
         {this.state.news.map((news, key)=>
           <div key={key} onClick={()=>this.setDetails(news)} className='col-sm-3'>
@@ -75,12 +76,13 @@ export default class GeneralNews extends Component {
             </div>
           </div>
       </div>
-
-      <div className='row' style={{marginTop:20}}>
-        <a href="#" className="previous" style={{backgroundColor:'lightgrey', border:'2px solid lightgrey', borderRadius:2, fontSize:20}}>&laquo; Previous</a>
-        <a href="#" className="previous" style={{backgroundColor:'#069fba', color:'white', border:'2px solid #069fba', borderRadius:2, fontSize:20}}> 1 &nbsp;</a>
-        <a href="#" className="next" style={{backgroundColor:'lightgrey', border:'2px solid lightgrey', borderRadius:2, fontSize:20}}>Next &raquo;</a>
       </div>
+    )
+  }
+  render() {
+    return (
+      <div className="App">
+        {this.state.loading ? <p style={{fontSize:16, fontWeight:'600'}}>Loading...</p> : this.showPage()}
       </div>
     );
   }
