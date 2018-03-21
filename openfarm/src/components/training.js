@@ -261,7 +261,7 @@ export default class Training extends Component {
         </div>
       </div>
       </div>
-      
+
       <div id="menu2" className="tab-pane fade">
         <div className="row" style={{marginTop:20}}>
           {this.state.videos.map((video, key)=>
@@ -273,9 +273,6 @@ export default class Training extends Component {
               </div>
             </div>
           </div>
-        </div>
-        <div style={{"position": "fixed", "zIndex": 1000, "bottom": "5%", "left": "5%"}} className='pull-left'>
-          <Link to='/admin'><button style={{color:'white', fontSize:18, borderRadius:10, backgroundColor:'#069fba', padding:5, margin:10}}>Back</button></Link>
         </div>
       </div>
     )

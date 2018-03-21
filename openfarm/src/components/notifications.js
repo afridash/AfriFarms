@@ -322,7 +322,7 @@ export default class Notifications extends Component {
      return (
        <div className='col-md-12'>
          <div className='row'>
-           <div className={this.state.showChats ? 'col-md-7 col-sm-12' : 'col-md-12 cols-sm-12'}>
+           <div className={this.state.showChats || this.state.showNotifs ? 'col-md-7 col-sm-12' : 'col-md-12 cols-sm-12'}>
              <div className='column'>
                <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                  <Tab eventKey={1} title="YOUR CHAT">
@@ -335,7 +335,7 @@ export default class Notifications extends Component {
                    title="NOTIFICATION">
                    <div className='col-sm-12'>
                      <br/>
-                     <Well bsSize="sm">ANOTHER IMPORTANT MESSAGE: And this is the body of the message ...</Well>
+                     <Well onClick={()=>this.setState({showNotifs:!this.state.showNotifs, showChats:false})} bsSize="sm">ANOTHER IMPORTANT MESSAGE: And this is the body of the message ...</Well>
                      <Well bsSize="small">THIS IS THE TITILE MESSAGE: And this is the body of the message ...</Well>
                    </div>
                  </Tab>
@@ -371,7 +371,23 @@ export default class Notifications extends Component {
                </div>
              </div>
            </div> }
-
+           {this.state.showNotifs &&
+           <div className='col-md-5 col-sm-12'>
+             <div className='col-sm-12' style={{backgroundColor:'#FAFAFA', marginTop:-20}}>
+               <div className='col-sm-8 col-sm-offset-2'>
+                 <div className='row' style={{padding:10}}>
+                 <div style={{lineHeight:1}} className="col-sm-10 col-sm-offset-1">
+                  <p>This is title of the subject</p>
+                 </div>
+                 </div>
+               </div>
+             </div>
+             <div className='chat col-sm-12'  style={{backgroundColor:'#EEEEEE', height:500}}>
+               <div className='chat-body' ref={(div) => {this.divList = div; }} style={{height:450, overflowX:'scroll'}}>
+                 <p>Hello World</p>
+               </div>
+             </div>
+           </div> }
          </div>
        </div>
      )
