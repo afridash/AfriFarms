@@ -59,8 +59,8 @@ render((
       <Route exact path={"/funding"} component={GeneralFunding} />
       <Route exact path={"/training"} component={Training} />
       <Route exact path={"/storage"} component={Storage} />
-      <Route exact path={"/fundingapp"} component={FundingApp} />
-      <Route exact path={"/adminview"} component={AdminView} />
+      <Route exact path={"/funding/:id"} component={FundingApp} />
+      <Route exact path={"/adminview/:id"} component={AdminView} />
     </Header>
       </Switch>
     </div>

@@ -111,6 +111,7 @@ export default class Header extends Component {
         {!this.state.loggedIn && <li onClick={()=>this.setState({selected:'about'})}><Link to="/about" style={{color:this.state.selected === 'about' ? 'black' :'white'}}>ABOUT US</Link></li>}
         {this.state.loggedIn ?   <li onClick={()=>this.setState({selected:'storage'})}> <Link  to='/storage' style={{color: this.state.selected === 'storage' ? 'black' :'white'}}>STORAGE FACILITIES</Link></li> :
         <li onClick={()=>this.setState({selected:'contact'})}><Link to="/contact" style={{color:this.state.selected === 'contact' ? 'black' :'white'}}>CONTACT US</Link></li>}
+        {this.state.loggedIn &&   <li onClick={()=>this.setState({selected:'admin'})}> <Link  to='/admin' style={{color: this.state.selected === 'admin' ? 'black' :'white'}}>ADMIN</Link></li>}
       </ul>
       <ul className="nav navbar-nav navbar-right" style={{backgroundColor:'#007185'}}>
         <form className="navbar-form navbar-left">

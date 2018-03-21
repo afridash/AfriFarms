@@ -22,9 +22,9 @@ export default class App extends Component {
               <div class="carousel-caption" style={{top:'50%'}}>
                 <h2 style={{fontWeight:'600'}}>Connect with Farmers,</h2>
                 <h2 style={{fontWeight:'600'}}>Funding, and Markets</h2>
-                <a href='#'>
+                <Link to='/login'>
                   <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -33,9 +33,9 @@ export default class App extends Component {
               <div class="carousel-caption" style={{top:'50%'}}>
                 <h2 style={{fontWeight:'600'}}>Connect with Farmers,</h2>
                 <h2 style={{fontWeight:'600'}}>Funding, and Markets</h2>
-                <a href='#'>
+                <Link to='/login'>
                   <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="item">
@@ -43,9 +43,9 @@ export default class App extends Component {
               <div class="carousel-caption" style={{top:'50%'}}>
                 <h2 style={{fontWeight:'600'}}>Connect with Farmers,</h2>
                 <h2 style={{fontWeight:'600'}}>Funding, and Markets</h2>
-                <a href='#'>
+                <Link to='/login'>
                   <button style={{backgroundColor:'#1babc7', padding:10, color:'white', borderColor:'transparent', borderRadius:2}}>GET STARTED</button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -100,7 +100,10 @@ export default class App extends Component {
                   <h3>We are here to help Grow your Farm</h3>
                   <i>Funding, Support Services, and Connection</i>
                   <p style={{fontSize:14}}>Open Farm is built for you, the farmer looking for means to increase your network, sell produce faster, and gain acess to loans and grants. It is built for you the investor looking for a productive farm to invest in. And for everyone else, you are welcome to connect with our farmers, and investors.</p>
-                  <button style={{backgroundColor:'#1babc7', marginTop:40, padding:10, color:'white', borderColor:'transparent', borderRadius:30}}>SEE MORE ABOUT US</button>
+                  <Link to='/about'>
+                    <button style={{backgroundColor:'#1babc7', marginTop:40, padding:10, color:'white', borderColor:'transparent', borderRadius:30}}>SEE MORE ABOUT US</button>
+                  </Link>
+
                 </div>
               </div>
             </div>

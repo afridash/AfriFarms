@@ -72,7 +72,6 @@ export default class Sell extends Component {
         })
         this.setState({title:'', description:'', fileName:undefined, loading:false,error:'', saved:true, attachment:''})
       }).catch((error)=> {
-        console.log(error)
         this.setState({error:'Failed to upload attachment', loading:false})
       })
 
@@ -125,8 +124,6 @@ export default class Sell extends Component {
               <div className="row" style={{marginTop:20}}>
                 <div className="col-md-12">
                   <div className='row' style={{marginTop:40}}>
-                    <div className='col-sm-2'></div>
-                    <div className='col-sm-8'>
                       <div className='col-sm-12'>
                         <div className='col-sm-4' >
                           <label htmlFor="Title">Name</label>
@@ -135,23 +132,15 @@ export default class Sell extends Component {
                           <input type="text" placeholder='Enter Item Name' name='title' value={this.state.title} onChange={this.handleChange}  className="form-control" />
                         </div>
                       </div>
-                    </div>
                   </div>
                   <div className='row' style={{marginTop:20}}>
-                    <div className='col-sm-2'></div>
-                    <div className='col-sm-8'>
-                      <div className='row'>
-                        <div className='col-sm-4'>
-                          <label htmlFor="description">Description</label>
-                        </div>
-                        <div className='col-sm-8'>
-                          <textarea onChange={this.handleChange} value={this.state.description} name='description' placeholder='Item Description'  className='form-control' rows="8" />
-                        </div>
+                      <div className='col-sm-4'>
+                        <label htmlFor="description">Description</label>
+                      </div>
+                      <div className='col-sm-8'>
+                        <textarea onChange={this.handleChange} value={this.state.description} name='description' placeholder='Item Description'  className='form-control' rows="8" />
                       </div>
                     </div>
-                    <div className='col-sm-2'></div>
-
-                  </div>
                   {this.state.attachment !== '' &&
                   <div className='row' style={{marginTop:20}}>
                     <div className='col-sm-2'></div>

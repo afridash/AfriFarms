@@ -48,20 +48,14 @@ export default class Home extends Component {
               <p style={{fontSize:20}}>Notifications <span className='text-danger'>{this.state.notificationsBadges}</span></p>
             </div>
           </Link>
-            <div className='col-sm-4'>
+            <Link to='/viewfunding' className='col-sm-4' style={{textDecoration:'none'}}>
               <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
                 <img src={require('../images/access-fund-icon.svg')} style={{padding:20, height:100, width:100}}  />
                 <p style={{fontSize:20}}>Funding</p>
               </div>
-            </div>
+            </Link>
           </div>
           <div className='col-sm-12' style={{fontWeight:'500', fontSize:'20'}}>
-            <div className='col-sm-4'>
-              <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
-                <img src={require('../images/trainings.svg')} style={{padding:20, height:100, width:100}}  />
-                <p style={{fontSize:20}}>Trainings</p>
-              </div>
-            </div>
             <div className='col-sm-4'>
               <div className='row' style={{border:'1px solid lightgrey', margin:10}}>
                 <Link style={{textDecoration:'none'}} to='/sell'>

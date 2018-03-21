@@ -31,7 +31,8 @@ export default class Funding extends Component {
     this.ref.on('child_added', (fund)=> {
       this.funds.push({
         title:fund.val().title,
-        applicants:fund.val().applicants
+        applicants:fund.val().applicants,
+        key:fund.key
       })
       this.setState({funds:this.funds})
     })
@@ -136,7 +137,7 @@ export default class Funding extends Component {
                 {this.state.funds.length === 0 && <p className='text-center lead'>Loading ...</p>}
                 {this.state.funds.map((fund)=>
                   <div className='col-sm-12' style={{marginTop:20,}}>
-                    <Link style={{textDecoration:'none'}} to='/viewfunding'>
+                    <Link style={{textDecoration:'none'}} to={'/adminview/'+fund.key}>
                     <p style={{borderRadius:2, borderColor:'black', backgroundColor:'#FAFAFA', fontSize:25, textAlign:'left' , boxShadow:'5px 5px 5px #888888'}}>
                       &nbsp;{fund.title}
                       <span  className='pull-right' style={{backgroundColor:'#00abc9', fontSize:25}}>&nbsp;&nbsp;{fund.applicants}&nbsp;&nbsp;</span></p>
