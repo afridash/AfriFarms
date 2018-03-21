@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 import FileReaderInput from 'react-file-reader-input'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
 import moment from 'moment'
+import { Link,Redirect, } from 'react-router-dom'
 import weather from 'yahoo-weather'
 import '../App.css';
 const styles = {
@@ -23,6 +23,7 @@ export default class Dashboard extends Component {
        lastName:'',
        address:'',
        phone:'',
+       bio:'',
      }
      firebase.auth().onAuthStateChanged(this.handleUser)
      this.usersRef = firebase.database().ref().child('users')
@@ -40,7 +41,7 @@ export default class Dashboard extends Component {
     this.updateWindowDimensions();
      window.addEventListener('resize', this.updateWindowDimensions)
 
-     weather('lagos').then(info => {
+     weather('port harcourt').then(info => {
        this.setState({
          temp:info.item.condition.temp,
          pressure:info.atmosphere.pressure,
@@ -138,6 +139,7 @@ export default class Dashboard extends Component {
         address:this.state.address,
         state:this.state.state,
         phone:this.state.phone,
+        bio:this.state.bio,
         produce:this.state.produce,
       }
       var user = firebase.auth().currentUser
@@ -253,6 +255,12 @@ export default class Dashboard extends Component {
                   onChange = {this.handleChange}
                 />
               </FormGroup>
+              <div className='row' style={{marginTop:10}}>
+                <label htmlFor="description">Bio</label>
+                <div className='col-sm-12'>
+                  <textarea rows='5' placeholder='Bio' className='form-control' name='bio' value={this.state.bio} onChange={this.handleChange} />
+                </div>
+              </div>
                 <FormGroup>
                   {this.state.loading ? <Button className="pull-right" type="submit"  bsSize="sm" style={{...styles.button, backgroundColor:'#1babc7', fontSize:16, color:'white'}}
                     >Saving in..</Button> : <Button className="pull-right" type="submit"  bsSize="sm" style={{...styles.button, backgroundColor:'#1babc7', fontSize:16, color:'white'}} onClick={(event) =>
@@ -267,9 +275,9 @@ export default class Dashboard extends Component {
     return (
       <div className="App">
         <div className='row' style={{marginTop:-20, }}>
-          <div className='col-md-3' style={{fontSize:20, backgroundColor:'#eeeeee',}}>
+          <div className='col-md-3' style={{backgroundColor:'#eeeeee'}}>
             <div className='row'>
-              <div  style={{backgroundColor:'#eeeeee', padding:10, margin:5}}>
+              <div  style={{backgroundColor:'#eeeeee', padding:10, margin:5, height:600}}>
               <div className='panel-body'>
                 <div className='row'>
                   <div className="pull-right" style={{fontSize:15}}>{moment().format('LLLL')}</div>
@@ -353,16 +361,9 @@ export default class Dashboard extends Component {
                   </div>
                   <div className='col-sm-7'>
                       <div className='row'>
-                        <div className='col-sm-4' style={{marginTop:5}}>
-                          <h4>View as: List Card</h4>
-                        </div>
+                        <div className='col-sm-4'>
 
-                        <div className='col-sm-2'>
-                        <div className='column'>
-                        <img src={require('../images/add-user.svg')} style={{height:20, width:20}}  />
-                        <h5>New</h5>
                         </div>
-                       </div>
                         <div className='col-sm-2' >
                           <div className='column'>
                           <img src={require('../images/report.svg')} style={{height:20, width:20}}  />
@@ -371,8 +372,10 @@ export default class Dashboard extends Component {
                         </div>
                         <div className='col-sm-2' >
                           <div className='column'>
-                          <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
-                          <h5>Chats</h5>
+                            <Link to="/chats" style={{color:'black', textDecoration:'none'}}>
+                              <img src={require('../images/chats.svg')} style={{height:20, width:20}}  />
+                              <h5>Chats</h5>
+                            </Link>
                           </div>
                         </div>
                         <div onClick={()=>this.setState({showProfile:!this.state.showProfile, selected:'user'})} className='col-sm-2' >
