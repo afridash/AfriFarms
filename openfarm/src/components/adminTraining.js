@@ -8,7 +8,7 @@ import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
 import '../App.css';
 
-export default class Training extends Component {
+export default class AdminTraining extends Component {
   constructor (props) {
     super(props)
     this.state = {
