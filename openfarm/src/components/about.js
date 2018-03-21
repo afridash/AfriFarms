@@ -23,25 +23,25 @@ export default class About extends Component {
           </div>
           <div className='col-sm-12' style={{fontWeight:'500', fontSize:'20'}}>
             <div className='col-sm-3'>
-              <div className='row text-center' style={{ border:'1px solid lightgrey', margin:10, height:250, width:350, backgroundColor:'#00abc9'}}>
+              <div className='text-center' style={{ border:'1px solid lightgrey', margin:10, height:250, backgroundColor:'#00abc9'}}>
                 <p style={{fontSize:40, marginTop:'30%', color:'white'}}>Messages</p>
               </div>
               <p>Support for farmer collaborations, sales, and knowledge growth</p>
             </div>
             <div className='col-sm-3'>
-              <div className='row text-center' style={{ border:'1px solid lightgrey', margin:10, height:250, width:350, backgroundColor:'#00abc9'}}>
+              <div className='text-center' style={{ border:'1px solid lightgrey', margin:10, height:250,  backgroundColor:'#00abc9'}}>
                 <p style={{fontSize:40, marginTop:'30%', color:'white'}}>Scope</p>
               </div>
                 <p>Enable farmers access opportunities, and sell their farm produce to consumers.</p>
             </div>
             <div className='col-sm-3'>
-              <div className='row text-center' style={{ border:'1px solid lightgrey', margin:10, height:250, width:350, backgroundColor:'#00abc9'}}>
+              <div className='text-center' style={{ border:'1px solid lightgrey', margin:10, height:250,  backgroundColor:'#00abc9'}}>
                 <p style={{fontSize:40, marginTop:'20%', color:'white'}}>Product Perspective</p>
               </div>
             <p>All in one platform for tutorials, funding, communication, and product marketing</p>
             </div>
             <div className='col-sm-3'>
-              <div className='row text-center' style={{ border:'1px solid lightgrey', margin:10, height:250, width:350, backgroundColor:'#00abc9'}}>
+              <div className='text-center' style={{ border:'1px solid lightgrey', margin:10, height:250, backgroundColor:'#00abc9'}}>
                 <p style={{fontSize:40, marginTop:'20%', color:'white'}}>Product Function</p>
               </div>
               <p>Serve as a central database offarmers in the Niger Delta region</p>
@@ -55,7 +55,7 @@ export default class About extends Component {
           </div>
           <div className='row'>
             <div className='col-sm-10 col-sm-offset-1' style={{ border:'1px solid lightgrey'}}>
-              <div className='row' style={{fontSize:20, margin:'2%'}}>
+              <div className='col-sm-12' style={{fontSize:20, margin:'2%'}}>
                 <div className='col-sm-12'>
                     <ul className="a" style={{textAlign:'left'}}>
                       <li>Farmers create an online profile with details of who they are and what farm produce they are into</li>
@@ -73,6 +73,10 @@ export default class About extends Component {
                 </div>
               </div>
             </div>
+          </div>
+          <div className='row' style={{marginTop:'10%'}}>
+            <i className="fas fa-copyright"></i>
+            <span> OpenFarm 2018. All Rights Reserved</span>
           </div>
       </div>
 

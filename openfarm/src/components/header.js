@@ -107,6 +107,7 @@ export default class Header extends Component {
         <li onClick={()=>this.setState({selected:'funding'})}><Link to="/funding" style={{color:this.state.selected === 'funding' ? 'black' :'white'}}>FUNDING </Link></li>
         <li onClick={()=>this.setState({selected:'training'})}><Link to="/training" style={{color:this.state.selected === 'training' ? 'black' :'white'}}>TRAINING</Link></li>
         <li onClick={()=>this.setState({selected:'news'})}><Link to="/news" style={{color:this.state.selected === 'news' ? 'black' :'white'}}>NEWS</Link></li>
+        <li onClick={()=>this.setState({selected:'market'})}><Link to="/market" style={{color:this.state.selected === 'market' ? 'black' :'white'}}>MARKET</Link></li>
         {!this.state.loggedIn && <li onClick={()=>this.setState({selected:'about'})}><Link to="/about" style={{color:this.state.selected === 'about' ? 'black' :'white'}}>ABOUT US</Link></li>}
         {this.state.loggedIn ?   <li onClick={()=>this.setState({selected:'storage'})}> <Link  to='/storage' style={{color: this.state.selected === 'storage' ? 'black' :'white'}}>STORAGE FACILITIES</Link></li> :
         <li onClick={()=>this.setState({selected:'contact'})}><Link to="/contact" style={{color:this.state.selected === 'contact' ? 'black' :'white'}}>CONTACT US</Link></li>}
