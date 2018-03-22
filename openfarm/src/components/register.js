@@ -3,7 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 import { Link,Redirect, } from 'react-router-dom'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
-import logo from '../openLogo.png';
+import logo from '../logo.svg';
 import '../App.css';
 
 export default class Login extends Component {
@@ -64,10 +64,9 @@ export default class Login extends Component {
             <form>
               <div className="col-sm-6 col-sm-offset-3" style={styles.box}>
                 <div>
-                  <img src={logo} alt="logo" />
+                  <img src={logo} style={{width:80, height:80}} alt="logo" />
                 </div>
                 <h3 className='text-center'>Create Farmer's Profile</h3>
-                <br/>
                 <FormGroup controlId="formControlsSelect">
                   <ControlLabel className="pull-left">Business Category</ControlLabel>
                   <FormControl name='occupation' onChange={this.handleChange} value={this.state.occupation} componentClass="select" placeholder="select">
@@ -76,8 +75,6 @@ export default class Login extends Component {
                     <option value="doctor">Doctor</option>
                   </FormControl>
                 </FormGroup>
-
-                <br/>
                 <FormGroup>
                   <FormControl
                     className='form-control'
@@ -86,8 +83,6 @@ export default class Login extends Component {
                     onChange = {this.handleChange}
                   />
                 </FormGroup>
-
-                <br/>
                 <FormGroup>
                   <FormControl
                     className='form-control'
@@ -97,8 +92,6 @@ export default class Login extends Component {
                     onChange = {this.handleChange}
                   />
                 </FormGroup>
-
-                <br/>
                 <FormGroup>
                   <FormControl
                     className='form-control'
@@ -108,8 +101,6 @@ export default class Login extends Component {
                     onChange = {this.handleChange}
                   />
                 </FormGroup>
-
-                <br/>
                 <FormGroup controlId="formControlsSelect2">
                   <ControlLabel className="pull-left">State</ControlLabel>
                   <FormControl name='state' onChange={this.handleChange} value={this.state.state} componentClass="select" placeholder="select">
@@ -123,7 +114,6 @@ export default class Login extends Component {
                 </FormGroup>
                 <p style={{color:'red'}}>{this.state.error}</p>
                 <div>
-                  <br/>
                   <p className="password">By clicking Register, you are indicating that you have read
                     and agree to the <Link to="/termsConditions">Terms & Conditions</Link> of using this service</p>
                 </div>

@@ -149,7 +149,7 @@ export default class App extends Component {
         </div>
         <div className='row' style={{marginTop:'10%'}}>
           <i className="fas fa-copyright"></i>
-          <span> OpenFarm 2018. All Rights Reserved</span>
+          <span> AfriFarms 2018. All Rights Reserved</span>
         </div>
         </div>
     );

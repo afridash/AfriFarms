@@ -7,17 +7,16 @@ export default class About extends Component {
     return (
       <div className="App">
         <div className="row" style={{fontSize:40, fontWeight:'700'}}>
-          About openFarm
+          About AfriFarms
         </div>
         <div className="row">
         </div>
         <div className='row'>
           <p className="col-sm-10 col-sm-offset-1" style={{fontSize:20}}>
-            Open Farm is a responsive web portal that seeks to make the life of farmers and farming easy.
+            FarmersMeet is a responsive web portal that seeks to make the life of farmers and farming easy.
              The portal will provide lot’s of information and also act as a central database for farmers in the region.
           </p>
         </div>
-
         <div className='col-sm-12'>
           <div className='pull-left' style={{margin:20}}>
           </div>
@@ -76,7 +75,7 @@ export default class About extends Component {
           </div>
           <div className='row' style={{marginTop:'10%'}}>
             <i className="fas fa-copyright"></i>
-            <span> OpenFarm 2018. All Rights Reserved</span>
+            <span> AfriFarms 2018. All Rights Reserved</span>
           </div>
       </div>
 

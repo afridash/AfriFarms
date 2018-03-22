@@ -3,7 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap"
 import { Link,Redirect, } from 'react-router-dom'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
-import logo from '../openLogo.png';
+import logo from '../logo.svg';
 import '../App.css';
 
 export default class Login extends Component {
@@ -47,7 +47,7 @@ export default class Login extends Component {
               <br/>
               <div className="col-sm-4 col-sm-offset-4" style={styles.box}>
                 <div>
-                  <img src={logo} alt="logo" />
+                  <img src={logo} style={{width:80, height:80}} alt="logo" />
                 </div>
                 <h3 className='text-center'>Login</h3>
                 <br/>

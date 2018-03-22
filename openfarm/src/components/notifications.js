@@ -117,6 +117,7 @@ export default class Notifications extends Component {
   }
   handleUser = (user)=> {
     if(user){
+      alert(user.photoURL)
       this.user = user
       this.messageAddedListener ('')
       this.getConversations()

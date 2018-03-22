@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link, Redirect} from 'react-router-dom'
-import logo from '../openLogo.png'
+import logo from '../logo.svg'
 import * as firebase from 'firebase'
 import {Firebase} from '../helpers/firebase'
 import '../App.css';
@@ -53,8 +53,8 @@ export default class Header extends Component {
                 </div>
                 <div className='col-sm-9' style={{fontSize:10, lineHeight:1, lineSpace:1}}>
                   <div className='pull-left'>
-                    <p>11, Elekahia Road</p>
-                    <p>Port Harcourt</p>
+                    <p>Street Address</p>
+                    <p>City</p>
                   </div>
                 </div>
               </div>
@@ -68,8 +68,8 @@ export default class Header extends Component {
                 </div>
                 <div className='col-sm-9' style={{marginLeft:-20}}>
                   <div className='pull-left' style={{fontSize:10, lineHeight:1, lineSpace:1}}>
-                    <p>info@openfarm.com.ng</p>
-                    <span>+234 809 773 7457</span>
+                    <p>info@email.com</p>
+                    <span>+234 00 0000 0000</span>
                   </div>
                 </div>
               </div>

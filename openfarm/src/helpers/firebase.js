@@ -1,10 +1,11 @@
 import * as firebase from 'firebase'
+//Copy and paste project config from firebase
   var config = {
-    apiKey: "AIzaSyC1-b5TmqmShzUDGC3ChneysQg2nZj9fo0",
-    authDomain: "openfarm-db746.firebaseapp.com",
-    databaseURL: "https://openfarm-db746.firebaseio.com",
-    projectId: "openfarm-db746",
-    storageBucket: "openfarm-db746.appspot.com",
-    messagingSenderId: "601405019635"
+  //  apiKey: Enter API KEY  ,
+  //  authDomain: Enter Domain ,
+  //  databaseURL: DB URL,
+    //projectId:  Enter projectId,
+  //  storageBucket: Enter storageBucket ,
+  //  messagingSenderId: Enter messagingSenderId
   }
   export const Firebase = firebase.initializeApp(config)
