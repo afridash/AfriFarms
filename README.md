@@ -6,8 +6,8 @@ Developed as one of the submissions for the hackathon hosted by the Ken Saro-Wiw
 
 # Getting Started
 1. Install Node and React https://reactjs.org/docs/add-react-to-a-new-app.html
-2 (i). Sign up with firebase, create new project
-2 (ii). Copy project configuration from firebase and paste into project directory  'src/helpers/firebase.js'
+2. (i). Sign up with firebase, create new project
+2. (ii). Copy project configuration from firebase and paste into project directory  'src/helpers/firebase.js'
 3. Change directory to project folder in cmd/terminal 
 3 (i). Start node server with 'npm start'
 # To Do 
